@@ -26,12 +26,6 @@ TextStyle smallHeaderTextStyle = GoogleFonts.poppins(
         color: DARK_COLOR,
         letterSpacing: 0.0));
 
-TextStyle smallGreenHeaderTextStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(
-        fontSize: ScreenUtil().setSp(12),
-        color: GREEN_STATUS_COLOR,
-        letterSpacing: 0.0));
-
 TextStyle smallAccentHeaderTextStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
         fontSize: ScreenUtil().setSp(12),
@@ -52,12 +46,6 @@ TextStyle boldSubtitleTextStyle = GoogleFonts.poppins(
         color: DARK_COLOR,
         letterSpacing: 0.0));
 
-TextStyle boldBlueSubtitleTextStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(
-        fontSize: ScreenUtil().setSp(14),
-        fontWeight: FontWeight.w400,
-        color: BLUE_STATUS_COLOR,
-        letterSpacing: 0.0));
 
 TextStyle alertMessageTextStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
@@ -94,36 +82,6 @@ TextStyle smallTextStyle = GoogleFonts.poppins(
         fontSize: ScreenUtil().setSp(12),
         fontWeight: FontWeight.w500,
         color: DARK_COLOR,
-        letterSpacing: 0.0));
-
-TextStyle tankTextStyle = GoogleFonts.poppins(
-    textStyle: TextStyle(
-        fontSize: ScreenUtil().setSp(18),
-        fontWeight: FontWeight.bold,
-        color: TANK_TEXT_COLOR,
-        shadows: <Shadow>[
-          Shadow(
-            // bottomLeft
-            offset: Offset(-1, -1),
-            color: TANK_TEXT_SHADOW_COLOR,
-          ),
-          Shadow(
-            // bottomRight
-            offset: Offset(1, -1),
-            blurRadius: 1,
-            color: TANK_TEXT_SHADOW_COLOR,
-          ),
-          Shadow(
-            // topRight
-            offset: Offset(1, 1),
-            color: TANK_TEXT_SHADOW_COLOR,
-          ),
-          Shadow(
-            // topLeft
-            offset: Offset(-1, 1),
-            color: TANK_TEXT_SHADOW_COLOR,
-          ),
-        ],
         letterSpacing: 0.0));
 
 TextStyle textButtonTextStyle = GoogleFonts.poppins(
