@@ -1,4 +1,4 @@
-# cheffresh
+# cheffresh [![Actions Status](https://github.com/FreshOver/cheffresh/workflows/Build%20and%20Test/badge.svg)](https://github.com/FreshOver/cheffresh/actions) <img src="https://img.shields.io/badge/made%20with-dart-blue.svg" alt="made with dart">
 
 This project created a part of Hack#20 hackthon
 
