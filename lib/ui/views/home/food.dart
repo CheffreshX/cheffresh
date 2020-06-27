@@ -79,7 +79,7 @@ class FoodCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
                 child: Image.network(
-                    "https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb"),
+                    'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'),
               ),
               Container(
                 transform: Matrix4.translationValues(0, -64, 0),
@@ -91,7 +91,7 @@ class FoodCard extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                        "https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f"),
+                        'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f'),
                   ),
                 ),
               ),
@@ -108,7 +108,7 @@ class FoodCard extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "by Louis Henson",
+                      'by Louis Henson',
                       style: TextStyle(
                         color: Color(0xFF4A5568),
                       ),
@@ -127,7 +127,7 @@ class FoodCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Pill(
-                          "4/10 available",
+                          '4/10 available',
                           textColor: Color(0xFF38A169),
                           color: Color(0xFFC6F6D5),
                         ),
@@ -139,14 +139,14 @@ class FoodCard extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     Text(
-                        "I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!",
+                        'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
                         style: TextStyle(
                           color: Color(0xFF4A5568),
                         )),
                     SizedBox(height: 24),
-                    Text("add Map here"),
+                    Text('add Map here'),
                     SizedBox(height: 24),
-                    Text("add reviews here"),
+                    Text('add reviews here'),
                     SizedBox(
                       height: 64,
                     )

@@ -65,14 +65,14 @@ reviewee: user
  The lib folder is divided into three folders. Core, constants and ui. Constants just holds constants and enums. Core contains all the files associated with the logic. ui contains all the files associated with the ui. 
 
 - Core is divided into four folders:
-1. Models: Contains all the plain data models
-2. Providers: Contains the classes that extend ChangeProvider that will handle actual business logic.
-3. Services: Contains the classes that will handle actual business logic.
-4. Routing: Contains the files that are related to routing including route observer that could be used in case of using a tracking service like Mixpanel.
+1. models: Contains all the plain data models
+2. providers: Contains the classes that extend ChangeProvider that will handle actual business logic.
+3. services: Contains the classes that will handle actual business logic.
+4. view_models: contains each a view model for each view
 
 - UI is divided into three folders:
 1. Shared: Contains files used in multiple other UI files. Usually contains global functions that return widgets.
-2. Views: Contains the files for the app views and view models
+2. Views: Contains the files for the app views
 3. Widgets: Contains widget files that are too big to keep in the view files. Usually shared widgets that are classes extending stateless/stateful widgets.
 
 ## High Level Architecture Overview
