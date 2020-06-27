@@ -23,10 +23,10 @@ class BottomSlidingBar extends StatelessWidget {
       backdropEnabled: true,
       borderRadius: radius,
       minHeight: ScreenUtil.screenHeight / 30,
-      maxHeight: ScreenUtil.screenHeight / 15,
+      maxHeight: ScreenUtil.screenHeight / 7,
       panel: Padding(
-        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(60)),
-        child: Text('Options to reserve'),
+        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(50)),
+        child: _buildPaymentMethods(),
       ),
       collapsed: GestureDetector(
           onTap: () => panelController.open(),
@@ -51,4 +51,56 @@ class BottomSlidingBar extends StatelessWidget {
       ),
     );
   }
+}
+
+Column _buildPaymentMethods() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Text(
+        'payment options',
+      ),
+      Card(
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Pay cash in person',
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(8)),
+                    child: Icon(
+                      Icons.check_circle,
+                    ))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'cash_on_delivery',
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(8)),
+                    child: Icon(
+                      Icons.check_circle_outline,
+                    ))
+              ],
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }
