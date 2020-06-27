@@ -1,3 +1,4 @@
+import 'package:cheffresh/ui/shared/buttons.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class BottomSlidingBar extends StatelessWidget {
       child: Center(
         child: Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30.0)),
+          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30.0)),
           child: Row(
             children: <Widget>[
               Text('Reserve'),
@@ -53,18 +54,21 @@ class BottomSlidingBar extends StatelessWidget {
   }
 }
 
-Column _buildPaymentMethods() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Text(
-        'payment options',
-      ),
-      Card(
-        child: Column(
-          children: <Widget>[
-            Row(
+Widget _buildPaymentMethods() {
+  return Padding(
+    padding: EdgeInsets.all(ScreenUtil().setWidth(8.0)),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Payment options',
+        ),
+        Spacer(),
+        Card(
+          child: Padding(
+            padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Text(
@@ -81,11 +85,16 @@ Column _buildPaymentMethods() {
                     ))
               ],
             ),
-            Row(
+          ),
+        ),
+        Card(
+          child: Padding(
+            padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'cash_on_delivery',
+                  'Reserve with credit card (soon)',
                 ),
                 const Spacer(
                   flex: 1,
@@ -98,9 +107,12 @@ Column _buildPaymentMethods() {
                     ))
               ],
             ),
-          ],
+          ),
         ),
-      ),
-    ],
+        Spacer(),
+        buildRaisedButton(text: 'Confirm', onPressed: () {}),
+        Spacer(),
+      ],
+    ),
   );
 }
