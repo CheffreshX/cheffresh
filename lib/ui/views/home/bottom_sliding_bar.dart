@@ -1,7 +1,11 @@
+import 'package:cheffresh/core/providers/preferences/preferences_provider.dart';
+import 'package:cheffresh/ui/shared/buttons.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
+import 'package:cheffresh/ui/shared/snackbars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class BottomSlidingBar extends StatelessWidget {
@@ -23,10 +27,10 @@ class BottomSlidingBar extends StatelessWidget {
       backdropEnabled: true,
       borderRadius: radius,
       minHeight: ScreenUtil.screenHeight / 30,
-      maxHeight: ScreenUtil.screenHeight / 15,
+      maxHeight: ScreenUtil.screenHeight / 7,
       panel: Padding(
-        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(60)),
-        child: Text('Options to reserve'),
+        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(50)),
+        child: _buildPaymentMethods(context),
       ),
       collapsed: GestureDetector(
           onTap: () => panelController.open(),
@@ -51,4 +55,77 @@ class BottomSlidingBar extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildPaymentMethods(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.all(ScreenUtil().setWidth(8.0)),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Payment options',
+        ),
+        Spacer(),
+        Card(
+          child: Padding(
+            padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Pay cash in person',
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: ScreenUtil().setWidth(8)),
+                    child: Icon(
+                      Icons.check_circle,
+                    ))
+              ],
+            ),
+          ),
+        ),
+        InkWell(
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Reserve with credit card',
+                  ),
+                  const Spacer(
+                    flex: 1,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenUtil().setWidth(8)),
+                      child: Icon(
+                        Icons.check_circle_outline,
+                      ))
+                ],
+              ),
+            ),
+          ),
+          onTap: () =>
+              showSnackbar('This feature will be implemented in the future'),
+        ),
+        Spacer(),
+        buildRaisedButton(
+            text: 'Confirm',
+            onPressed: () =>
+                Provider
+                    .of<PreferencesProvider>(context, listen: false)
+                    .mainScreenController
+                    .jumpToPage(0)),
+        Spacer(),
+      ],
+    ),
+  );
 }

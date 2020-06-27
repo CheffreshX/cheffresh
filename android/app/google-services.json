@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "418800705948",
+    "firebase_url": "https://cheffresh-2420a.firebaseio.com",
+    "project_id": "cheffresh-2420a",
+    "storage_bucket": "cheffresh-2420a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418800705948:android:54ef9c7b204395dbbe2859",
+        "android_client_info": {
+          "package_name": "com.freshover.cheffresh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418800705948-944pvv288r3otljb8m3l3c6ua7k57j49.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASSv8eYglhY6cFL5U_ejkXyduYkqEmfDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418800705948-944pvv288r3otljb8m3l3c6ua7k57j49.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

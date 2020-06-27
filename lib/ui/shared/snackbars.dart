@@ -23,3 +23,20 @@ void showNoInternetConnectionSnackbar() {
         duration: Duration(seconds: 5));
   }
 }
+
+void showSnackbar(String text) {
+  if (!Get.isSnackbarOpen) {
+    Get.rawSnackbar(
+        messageText: Text(
+          text,
+          style: alertMessageTextStyle,
+          textAlign: TextAlign.center,
+        ),
+        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+        margin: EdgeInsets.zero,
+        backgroundColor: ALERT_COLOR,
+        snackPosition: SnackPosition.BOTTOM,
+        snackStyle: SnackStyle.FLOATING,
+        duration: Duration(seconds: 5));
+  }
+}
