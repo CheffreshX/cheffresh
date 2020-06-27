@@ -2,6 +2,7 @@ import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base/base_view.dart';
+import 'package:cheffresh/ui/views/home/food.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -32,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
         builder: (BuildContext context, HomeViewModel model, Widget child) =>
             Scaffold(
                 key: scaffoldKey,
-                appBar: buildAppBar(),
+                // appBar: buildAppBar(),
                 resizeToAvoidBottomInset: true,
                 resizeToAvoidBottomPadding: true,
                 bottomNavigationBar: buildBottomNavigationBar(),
@@ -78,16 +79,5 @@ class _HomeViewState extends State<HomeView> {
       selectedFontSize: ScreenUtil().setSp(12),
       unselectedFontSize: ScreenUtil().setSp(12),
     );
-  }
-}
-
-class FoodView extends StatelessWidget {
-  const FoodView({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(child: const Text('Food Screen'));
   }
 }
