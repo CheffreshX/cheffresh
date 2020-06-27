@@ -29,7 +29,7 @@ class BottomSlidingBar extends StatelessWidget {
       minHeight: ScreenUtil.screenHeight / 30,
       maxHeight: ScreenUtil.screenHeight / 7,
       panel: Padding(
-        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(50)),
+        padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
         child: _buildPaymentMethods(context),
       ),
       collapsed: GestureDetector(
@@ -117,13 +117,18 @@ Widget _buildPaymentMethods(BuildContext context) {
               showSnackbar('This feature will be implemented in the future'),
         ),
         Spacer(),
-        buildRaisedButton(
-            text: 'Confirm',
-            onPressed: () =>
-                Provider
-                    .of<PreferencesProvider>(context, listen: false)
-                    .mainScreenController
-                    .jumpToPage(0)),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenUtil().setWidth(30),
+            vertical: ScreenUtil().setWidth(10),
+          ),
+          child: buildRaisedButton(
+              text: 'Confirm',
+              onPressed: () =>
+                  Provider.of<PreferencesProvider>(context, listen: false)
+                      .mainScreenController
+                      .jumpToPage(0)),
+        ),
         Spacer(),
       ],
     ),
