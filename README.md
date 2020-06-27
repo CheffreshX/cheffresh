@@ -19,6 +19,48 @@ This project created a part of #Hack20 hackthon
     └── widgets
 ```
 
+## Database structure
+### User
+```
+Name: string
+Picture: file
+Phone: string
+Address: string
+Lat: double
+Lng: double
+added_food: array[food]
+current_orders: array[orders]
+prev_orders: array[orders]
+```
+
+### Food
+```
+Name: string
+Picture: array[file]
+Details: string
+date_created: datetime
+price: double
+category: category
+tags: array[tags]
+```
+
+### Order
+```
+date_created: datetime
+food_item: food
+seller: user
+buyer: user
+```
+
+### Reviews
+```
+date_created: datetime
+review_text: string
+rating: 1-5
+reviewer: user
+reviewee: user
+```
+
 ## Folder Structure explanation
  The lib folder is divided into three folders. Core, constants and ui. Constants just holds constants and enums. Core contains all the files associated with the logic. ui contains all the files associated with the ui. 
 
