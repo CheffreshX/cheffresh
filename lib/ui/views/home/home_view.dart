@@ -1,9 +1,8 @@
+import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/views/base/base_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'home_view_model.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -26,8 +25,8 @@ class _HomeViewState extends State<HomeView> {
                 body: SafeArea(
                     child: model.busy
                         ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
+                      child: CircularProgressIndicator(),
+                    )
                         : Container(child: const Text('Home Screen')))));
   }
 

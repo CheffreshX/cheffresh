@@ -1,5 +1,5 @@
+import 'package:cheffresh/core/view_models/splash/splash_view_model.dart';
 import 'package:cheffresh/ui/views/base/base_view.dart';
-import 'package:cheffresh/ui/views/splash/splash_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,8 +17,8 @@ class SplashView extends StatelessWidget {
               body: SafeArea(
                 child: Center(
                     child: Container(
-                  color: Colors.lightGreenAccent,
-                )),
+                      color: Colors.lightGreenAccent,
+                    )),
               ),
             ));
   }
