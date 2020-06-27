@@ -49,6 +49,7 @@ tags: array[tags]
 date_created: datetime
 food_item: food
 seller: user
+buyer: user
 ```
 
 ### Reviews
