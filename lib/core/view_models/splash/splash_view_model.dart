@@ -9,7 +9,7 @@ class SplashViewModel extends BaseModel {
   final _navigationService = locator<NavigationService>();
 
   Future<void> onReady() async {
-    Future.delayed(Duration(seconds: 3)).whenComplete(() =>
+    await Future.delayed(Duration(seconds: 3)).whenComplete(() =>
         unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Home)));
   }
 }
