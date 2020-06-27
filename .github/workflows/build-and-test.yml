@@ -11,8 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-          repository: sherifhasan/aser
-          token: ${{ secrets.ACCESS_TOKEN }} 
+          repository: FreshOver/cheffresh
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
