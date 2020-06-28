@@ -1,9 +1,12 @@
 import 'package:cheffresh/core/view_models/orders/orders_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
+import 'package:cheffresh/ui/shared/pill.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class DummyOrder {
   DateTime DateCreated;
@@ -52,7 +55,7 @@ class DummyOrder {
 
 List<DummyOrder> ORDERS = [
   DummyOrder(
-    DateCreated: DateTime.parse('1969-07-20 20:18:04Z'),
+    DateCreated: DateTime.parse('2020-07-20 20:18:04Z'),
     DishName: 'Fish n\' Chips',
     Details:
         'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
@@ -133,17 +136,113 @@ class _OrderCardState extends State<OrderCard> {
   Widget build(BuildContext context) {
     return Card(
         color: PRIMARY_COLOR,
+        borderOnForeground: true,
         elevation: 1.0,
         child: Column(
           children: <Widget>[
-            InkWell(
-                onTap: () => _openCart(),
-                child: Center(
-                  child: _isExpanded
-                      ? Icon(Icons.keyboard_arrow_down)
-                      : Icon(Icons.keyboard_arrow_up),
-                )),
-            if (_isExpanded) Text('more details'),
+            Column(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    ClipRRect(
+                      borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(5)),
+                      child: Image.network(
+                        'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb',
+                        height: ScreenUtil.screenHeightDp / 8,
+                        width: double.maxFinite,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                    Positioned(
+                      right: 0.0,
+                      top: 0.0,
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            width: ScreenUtil.screenHeightDp / 10,
+                            height: ScreenUtil.screenHeightDp / 10,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: ScreenUtil().setWidth(3),
+                                  color: CONTRAST_COLOR),
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: widget.order.FoodPictures,
+                              ),
+                            ),
+                          ),
+                          SmoothStarRating(
+                              allowHalfRating: true,
+                              starCount: 5,
+                              rating: widget.order.FoodProviderRating,
+                              size: ScreenUtil().setWidth(15),
+                              isReadOnly: true,
+                              color: ALERT_COLOR,
+                              spacing: 0.0),
+                        ],
+                      ),
+                    ),
+                    if (widget.order.Tags?.isNotEmpty)
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0, top: 5.0),
+                        child: Container(
+                          width: ScreenUtil.screenWidthDp / 2,
+                          child: Row(
+                            children: <Widget>[
+                              Pill(widget.order.Tags[0],
+                                color: CONTRAST_COLOR,),
+                              SizedBox(width: ScreenUtil().setWidth(5),),
+                              if (widget.order.Tags.length > 1)
+                                Pill(widget.order.Tags[1],
+                                    color: PLACEHOLDER_COLOR),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenUtil().setWidth(10),
+                    vertical: ScreenUtil().setWidth(5),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(widget.order.DishName),
+                          Text('£ ' + widget.order.Price.toString()),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                if (_isExpanded)
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenUtil().setWidth(10),),
+                    child: Column(
+
+                      children: <Widget>[
+                        Text(widget.order.Details),
+                        Text('Address: ' + widget.order.Address),
+                        Text('Map'),
+                      ],
+                    ),
+                  ),
+                InkWell(
+                  onTap: () => _openCart(),
+                  child: Center(
+                    child: _isExpanded
+                        ? Icon(Icons.keyboard_arrow_up)
+                        : Icon(Icons.keyboard_arrow_down),
+                  ),
+                ),
+              ],
+            ),
           ],
         ));
   }
