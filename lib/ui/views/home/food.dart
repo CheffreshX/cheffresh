@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -184,6 +185,7 @@ class Location {
   Location(this.lat, this.lon);
 }
 
+// ignore: must_be_immutable
 class Map extends StatefulWidget {
   LatLng latLng;
   CameraPosition position;
@@ -263,7 +265,7 @@ class Reviews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> reviews = [
+    var reviews = [
       Review(score: score, author: author, description: description),
       SizedBox(height: 8),
       Review(score: score, author: author, description: description),
