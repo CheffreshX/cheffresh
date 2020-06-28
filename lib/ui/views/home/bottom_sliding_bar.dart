@@ -1,7 +1,7 @@
 import 'package:cheffresh/core/providers/preferences/preferences_provider.dart';
 import 'package:cheffresh/ui/shared/buttons.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
-import 'package:cheffresh/ui/shared/snackbars.dart';
+import 'package:cheffresh/ui/shared/dialogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -46,10 +46,8 @@ class BottomSlidingBar extends StatelessWidget {
         child: Padding(
           padding:
               EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30.0)),
-          child: Row(
-            children: <Widget>[
-              Text('Reserve'),
-            ],
+          child: Center(
+            child: Text('Reserve'),
           ),
         ),
       ),
@@ -91,31 +89,31 @@ Widget _buildPaymentMethods(BuildContext context) {
           ),
         ),
         InkWell(
-          child: Card(
-            child: Padding(
-              padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    'Reserve with credit card',
-                  ),
-                  const Spacer(
-                    flex: 1,
-                  ),
-                  Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: ScreenUtil().setWidth(8)),
-                      child: Icon(
-                        Icons.check_circle_outline,
-                      ))
-                ],
+            child: Card(
+              child: Padding(
+                padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Reserve with credit card',
+                    ),
+                    const Spacer(
+                      flex: 1,
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ScreenUtil().setWidth(8)),
+                        child: Icon(
+                          Icons.check_circle_outline,
+                        ))
+                  ],
+                ),
               ),
             ),
-          ),
-          onTap: () =>
-              showSnackbar('This feature will be implemented in the future'),
-        ),
+            onTap: () =>
+                displayDialog(
+                    'This feature will be implemented in the future')),
         Spacer(),
         Padding(
           padding: EdgeInsets.symmetric(
@@ -125,7 +123,8 @@ Widget _buildPaymentMethods(BuildContext context) {
           child: buildRaisedButton(
               text: 'Confirm',
               onPressed: () =>
-                  Provider.of<PreferencesProvider>(context, listen: false)
+                  Provider
+                      .of<PreferencesProvider>(context, listen: false)
                       .mainScreenController
                       .jumpToPage(0)),
         ),

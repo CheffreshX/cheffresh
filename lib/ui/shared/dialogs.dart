@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-void errorAlertDialog(String error) {
+void displayDialog(String error) {
   SystemChannels.textInput.invokeMethod('TextInput.hide');
   showDialog(
       context: Get.overlayContext,

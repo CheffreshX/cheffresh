@@ -69,7 +69,7 @@ class ConnectivityService {
 bool hasInternetConnection() {
   final connectionStatus = ConnectivityService.getInstance();
   if (!connectionStatus.hasConnection) {
-    errorAlertDialog('No internet connection');
+    displayDialog('No internet connection');
     return false;
   }
   return true;
