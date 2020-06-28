@@ -68,8 +68,8 @@ class _HomeViewState extends State<HomeView> {
           title: Text('Food'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          title: Text('settings'),
+          icon: Icon(Icons.more_horiz),
+          title: Text('more'),
         ),
       ],
       showSelectedLabels: false,
