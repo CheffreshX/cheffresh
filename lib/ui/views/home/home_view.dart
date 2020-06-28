@@ -1,5 +1,5 @@
 import 'package:cheffresh/core/constants/main_tab.dart';
-import 'package:cheffresh/core/providers/preferences/preferences_provider.dart';
+import 'package:cheffresh/core/providers/preferences/controller_provider.dart';
 import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'bottom_sliding_bar.dart';
 
@@ -21,7 +20,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final PanelController panelController = PanelController();
+
   MainTab _currentTab = MainTab.HOME;
 
   @override
@@ -37,14 +36,13 @@ class _HomeViewState extends State<HomeView> {
                 body: SafeArea(
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
-                    controller: Provider.of<PreferencesProvider>(context)
+                    controller: Provider.of<ControllerProvider>(context)
                         .mainScreenController,
                     onPageChanged: onPageChanged,
                     children: <Widget>[
                       OrdersView(),
                       BottomSlidingBar(
                         body: FoodView(),
-                        panelController: panelController,
                       ),
                       SettingsView(),
                     ],
@@ -80,7 +78,7 @@ class _HomeViewState extends State<HomeView> {
       currentIndex: _currentTab.index,
       onTap: (index) =>
           Provider
-              .of<PreferencesProvider>(context, listen: false)
+              .of<ControllerProvider>(context, listen: false)
               .mainScreenController
               .jumpToPage(index),
       selectedFontSize: ScreenUtil().setSp(12),
