@@ -57,7 +57,7 @@ class DummyOrder {
 
 List<DummyOrder> ORDERS = [
   DummyOrder(
-    DateCreated: DateTime.parse('2020-07-20 20:18:04Z'),
+    DateCreated: DateTime.parse('2020-06-28 20:18:04Z'),
     DishName: 'Fish n\' Chips',
     Details:
         'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
@@ -140,6 +140,12 @@ class OrderCard extends StatefulWidget {
 class _OrderCardState extends State<OrderCard> {
   bool _isExpanded = false;
 
+  bool hasBeenCollected(DateTime dateCollected) =>
+      !DateTime
+          .now()
+          .difference(dateCollected)
+          .isNegative;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -165,16 +171,47 @@ class _OrderCardState extends State<OrderCard> {
                   ),
                   child: Column(
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(widget.order.DishName),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text('£ ' + widget.order.Price.toString()),
-                              Text('£ ' + widget.order.Price.toString()),
+                              Text(widget.order.DishName),
+                              if (hasBeenCollected(widget.order.DateCreated))
+                                Pill(
+                                  '',
+                                  color: ALERT_COLOR,
+                                  widget: Row(
+                                    children: <Widget>[
+                                      Text('Add Review '),
+                                      Icon(
+                                        Icons.rate_review,
+                                        size: ScreenUtil().setWidth(15),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              else
+                                Pill(
+                                  '',
+                                  color: ALERT_COLOR,
+                                  widget: Row(
+                                    children: <Widget>[
+                                      Text('Call '),
+                                      Icon(
+                                        Icons.call,
+                                        size: ScreenUtil().setWidth(15),
+                                      )
+                                    ],
+                                  ),
+                                ),
                             ],
                           ),
+                          Text(
+                              'Collected ${getDateCollected(widget.order
+                                  .DateCreated)} for £' +
+                                  widget.order.Price.toString()),
                         ],
                       ),
                     ],
@@ -212,6 +249,23 @@ class _OrderCardState extends State<OrderCard> {
       _isExpanded = !_isExpanded;
     });
   }
+
+  String getDateCollected(DateTime orderDate) {
+    final now = DateTime.now();
+    var time = '';
+    if (now
+        .difference(orderDate)
+        .inDays < 1) {
+      time = 'today at ${orderDate.hour}:${orderDate.minute}';
+    } else if (now
+        .difference(orderDate)
+        .inDays < 2) {
+      time = 'yesterday at ${orderDate.hour}:${orderDate.minute}';
+    } else {
+      time = 'on ${orderDate.day}/${orderDate.month}/${orderDate.year}';
+    }
+    return time;
+  }
 }
 
 class FoodVisual extends StatelessWidget {
@@ -225,11 +279,10 @@ class FoodVisual extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius:
-      BorderRadius.vertical(top: Radius.circular(5)),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
       child: Image.network(
         widget.order.FoodImages[0],
-        height: ScreenUtil.screenHeightDp / 8,
+        height: ScreenUtil.screenHeightDp / 5,
         width: double.maxFinite,
         fit: BoxFit.fitWidth,
       ),
@@ -280,8 +333,9 @@ class FoodProviderVisualWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
+      left: 0.0,
       right: 0.0,
-      top: 0.0,
+      bottom: 0.0,
       child: Column(
         children: <Widget>[
           Container(
