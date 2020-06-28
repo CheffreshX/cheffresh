@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:cheffresh/core/models/review/review.dart';
 import 'package:cheffresh/core/models/user/user.dart';
 
 import '../serializers.dart';
@@ -54,8 +55,8 @@ abstract class Reservation implements Built<Reservation, ReservationBuilder> {
   @nullable
   BuiltList<String> get pictures;
 
-//  @nullable
-//  BuiltList<Review> get reviews;
+  @nullable
+  BuiltList<Review> get reviews;
 
   String toJson() {
     return json.encode(serializers.serializeWith(Reservation.serializer, this));

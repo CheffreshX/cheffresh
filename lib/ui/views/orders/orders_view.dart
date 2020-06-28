@@ -1,10 +1,8 @@
-import 'package:cheffresh/core/models/user/user.dart';
 import 'package:cheffresh/core/view_models/orders/orders_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cheffresh/ui/widgets/pill.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -181,42 +179,19 @@ class _OrderCardState extends State<OrderCard> {
                             children: <Widget>[
                               Text(widget.order.DishName),
                               if (hasBeenCollected(widget.order.DateCreated))
-                                InkWell(
-                                  onTap: () {
-                                    final userModel = User((UserBuilder b) =>
-                                    b
-                                      ..name = 'user@test.com'
-                                      ..reservations.addAll(
-                                          ['John', 'Sophia', 'Dave', 'Linda'])
-                                      ..location = GeoPoint(2.3, 4.3));
-//
-//      var copiedUserModel = userModel.rebuild((b) => b
-//        ..phone = '0123123');
-//
-                                    print(userModel);
-//      print(copiedUserModel);
-
-                                    final userModelJson = userModel.toJson();
-                                    print('json:' + userModelJson);
-
-                                    final userModelFromJson =
-                                    User.fromJson(userModelJson);
-                                    print(userModelFromJson);
-                                  },
-                                  child: Pill(
-                                    '',
-                                    color: ALERT_COLOR,
-                                    widget: Row(
-                                      children: <Widget>[
-                                        Text('Add Review '),
-                                        Icon(
-                                          Icons.rate_review,
-                                          size: ScreenUtil().setWidth(15),
-                                        )
-                                      ],
-                                    ),
+                               Pill(
+                                  '',
+                                  color: ALERT_COLOR,
+                                  widget: Row(
+                                    children: <Widget>[
+                                      Text('Add Review '),
+                                      Icon(
+                                        Icons.rate_review,
+                                        size: ScreenUtil().setWidth(15),
+                                      )
+                                    ],
                                   ),
-                                )
+                               )
                               else
                                 Pill(
                                   '',

@@ -76,16 +76,18 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
     }
     if (object.createBy != null) {
       result
-        ..add('created_by')
-        ..add(serializers.serialize(object.createBy,
-            specifiedType: const FullType(User)));
+        ..add('created_by')..add(serializers.serialize(object.createBy,
+          specifiedType: const FullType(User)));
     }
     if (object.pictures != null) {
-      result
-        ..add('pictures')
-        ..add(serializers.serialize(object.pictures,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(String)])));
+      result..add('pictures')..add(serializers.serialize(object.pictures,
+          specifiedType:
+          const FullType(BuiltList, const [const FullType(String)])));
+    }
+    if (object.reviews != null) {
+      result..add('reviews')..add(serializers.serialize(object.reviews,
+          specifiedType:
+          const FullType(BuiltList, const [const FullType(Review)])));
     }
     return result;
   }
@@ -151,6 +153,12 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
                       const FullType(BuiltList, const [const FullType(String)]))
               as BuiltList<Object>);
           break;
+        case 'reviews':
+          result.reviews.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Review)]))
+              as BuiltList<Object>);
+          break;
       }
     }
 
@@ -181,22 +189,25 @@ class _$Reservation extends Reservation {
   final User createBy;
   @override
   final BuiltList<String> pictures;
+  @override
+  final BuiltList<Review> reviews;
 
   factory _$Reservation([void Function(ReservationBuilder) updates]) =>
-      (new ReservationBuilder()..update(updates)).build();
+      (new ReservationBuilder()
+        ..update(updates)).build();
 
-  _$Reservation._(
-      {this.dateCreated,
-      this.isFull,
-      this.totalCount,
-      this.reservedCount,
-      this.mealName,
-      this.category,
-      this.tags,
-      this.details,
-      this.price,
-      this.createBy,
-      this.pictures})
+  _$Reservation._({this.dateCreated,
+    this.isFull,
+    this.totalCount,
+    this.reservedCount,
+    this.mealName,
+    this.category,
+    this.tags,
+    this.details,
+    this.price,
+    this.createBy,
+    this.pictures,
+    this.reviews})
       : super._();
 
   @override
@@ -220,7 +231,8 @@ class _$Reservation extends Reservation {
         details == other.details &&
         price == other.price &&
         createBy == other.createBy &&
-        pictures == other.pictures;
+        pictures == other.pictures &&
+        reviews == other.reviews;
   }
 
   @override
@@ -234,33 +246,30 @@ class _$Reservation extends Reservation {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, dateCreated.hashCode),
-                                            isFull.hashCode),
-                                        totalCount.hashCode),
-                                    reservedCount.hashCode),
-                                mealName.hashCode),
-                            category.hashCode),
-                        tags.hashCode),
-                    details.hashCode),
-                price.hashCode),
-            createBy.hashCode),
-        pictures.hashCode));
+                                        $jc(
+                                            $jc($jc(0, dateCreated.hashCode),
+                                                isFull.hashCode),
+                                            totalCount.hashCode),
+                                        reservedCount.hashCode),
+                                    mealName.hashCode),
+                                category.hashCode),
+                            tags.hashCode),
+                        details.hashCode),
+                    price.hashCode),
+                createBy.hashCode),
+            pictures.hashCode),
+        reviews.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Reservation')
-          ..add('dateCreated', dateCreated)
-          ..add('isFull', isFull)
-          ..add('totalCount', totalCount)
-          ..add('reservedCount', reservedCount)
-          ..add('mealName', mealName)
-          ..add('category', category)
-          ..add('tags', tags)
-          ..add('details', details)
-          ..add('price', price)
-          ..add('createBy', createBy)
-          ..add('pictures', pictures))
+      ..add('dateCreated', dateCreated)..add('isFull', isFull)..add(
+          'totalCount', totalCount)..add('reservedCount', reservedCount)..add(
+          'mealName', mealName)..add('category', category)..add(
+          'tags', tags)..add('details', details)..add('price', price)..add(
+          'createBy', createBy)..add('pictures', pictures)..add(
+          'reviews', reviews))
         .toString();
   }
 }
@@ -306,13 +315,24 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
   set price(double price) => _$this._price = price;
 
   UserBuilder _createBy;
+
   UserBuilder get createBy => _$this._createBy ??= new UserBuilder();
+
   set createBy(UserBuilder createBy) => _$this._createBy = createBy;
 
   ListBuilder<String> _pictures;
+
   ListBuilder<String> get pictures =>
       _$this._pictures ??= new ListBuilder<String>();
+
   set pictures(ListBuilder<String> pictures) => _$this._pictures = pictures;
+
+  ListBuilder<Review> _reviews;
+
+  ListBuilder<Review> get reviews =>
+      _$this._reviews ??= new ListBuilder<Review>();
+
+  set reviews(ListBuilder<Review> reviews) => _$this._reviews = reviews;
 
   ReservationBuilder();
 
@@ -329,6 +349,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
       _price = _$v.price;
       _createBy = _$v.createBy?.toBuilder();
       _pictures = _$v.pictures?.toBuilder();
+      _reviews = _$v.reviews?.toBuilder();
       _$v = null;
     }
     return this;
@@ -363,7 +384,8 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
               details: _details?.build(),
               price: price,
               createBy: _createBy?.build(),
-              pictures: _pictures?.build());
+              pictures: _pictures?.build(),
+              reviews: _reviews?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -376,6 +398,8 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
         _createBy?.build();
         _$failedField = 'pictures';
         _pictures?.build();
+        _$failedField = 'reviews';
+        _reviews?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Reservation', _$failedField, e.toString());
