@@ -4,6 +4,7 @@ import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cheffresh/ui/views/home/food.dart';
+import 'package:cheffresh/ui/views/orders/orders_view.dart';
 import 'package:cheffresh/ui/views/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,12 +41,12 @@ class _HomeViewState extends State<HomeView> {
                         .mainScreenController,
                     onPageChanged: onPageChanged,
                     children: <Widget>[
-                      Text('orders'),
+                      OrdersView(),
                       BottomSlidingBar(
                         body: FoodView(),
                         panelController: panelController,
                       ),
-                      SettingsView()
+                      SettingsView(),
                     ],
                   ),
                 )));
@@ -62,17 +63,14 @@ class _HomeViewState extends State<HomeView> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.history),
-          activeIcon: Icon(Icons.history),
           title: Text('Orders'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.fastfood),
-          activeIcon: Icon(Icons.fastfood),
           title: Text('Food'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          activeIcon: Icon(Icons.settings),
           title: Text('settings'),
         ),
       ],
