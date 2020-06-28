@@ -1,8 +1,7 @@
 import 'package:cheffresh/core/view_models/login/login_view_model.dart';
+import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../base_view.dart';
 
 class LoginView extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();

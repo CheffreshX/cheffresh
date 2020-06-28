@@ -2,6 +2,7 @@ import 'package:cheffresh/core/constants/main_tab.dart';
 import 'package:cheffresh/core/providers/preferences/preferences_provider.dart';
 import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
+import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cheffresh/ui/views/home/food.dart';
 import 'package:cheffresh/ui/views/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '../base_view.dart';
 import 'bottom_sliding_bar.dart';
 
 class HomeView extends StatefulWidget {

@@ -2,9 +2,8 @@ import 'package:cheffresh/core/view_models/settings/settings_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/shared/dialogs.dart';
+import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/material.dart';
-
-import '../base_view.dart';
 
 class SettingsView extends StatelessWidget {
   @override
