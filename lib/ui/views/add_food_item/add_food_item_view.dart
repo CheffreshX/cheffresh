@@ -61,6 +61,7 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                         : SingleChildScrollView(
                             child: Column(
                               children: <Widget>[
+                                SizedBox(height: 25),
                                 Padding(
                                   padding: const EdgeInsets.all(20.0),
                                   child: FormBuilder(
@@ -242,17 +243,17 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                                 children: <Widget>[
                                                   Icon(Icons.add_a_photo,
                                                       color: Colors.white),
-                                                  SizedBox(width: 15),
+                                                  SizedBox(width: 12),
                                                   Text(
-                                                    'Capture Photo',
+                                                    'Camera',
                                                     style: TextStyle(
-                                                        fontSize: 18,
+                                                        fontSize: 16,
                                                         color: Colors.white),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(width: 15),
+                                            SizedBox(width: 12),
                                             RaisedButton(
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
@@ -263,11 +264,11 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                                 children: <Widget>[
                                                   Icon(Icons.image,
                                                       color: Colors.white),
-                                                  SizedBox(width: 15),
+                                                  SizedBox(width: 12),
                                                   Text(
-                                                    'Add Image',
+                                                    'Gallery',
                                                     style: TextStyle(
-                                                        fontSize: 18,
+                                                        fontSize: 16,
                                                         color: Colors.white),
                                                   ),
                                                 ],

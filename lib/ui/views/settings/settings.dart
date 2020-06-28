@@ -15,7 +15,7 @@ class SettingsView extends StatelessWidget {
                 Widget child) =>
             Scaffold(
               appBar: defaultAppBar(
-                title: 'Settings',
+                title: 'More',
               ),
               body: model.busy
                   ? const Center(
