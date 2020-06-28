@@ -4,7 +4,7 @@ const Color ACCENT_COLOR = Color(0xff2E2B7C);
 const Color PRIMARY_COLOR = Color(0xffE9E8F1);
 const Color CONTRAST_COLOR = Colors.white;
 Color barrierColor = Colors.black.withOpacity(0);
-
+const SPLASH_COLOR = Color(0xf0fff4);
 const Color BACKGROUND_COLOR = Color(0xfff6faff);
 const Color DARK_COLOR = Colors.black;
 const Color ALERT_COLOR = Colors.redAccent;

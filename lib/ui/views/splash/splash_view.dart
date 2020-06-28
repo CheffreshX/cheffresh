@@ -1,4 +1,6 @@
+import 'package:cheffresh/core/constants/image_paths.dart';
 import 'package:cheffresh/core/view_models/splash/splash_view_model.dart';
+import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,10 +17,17 @@ class SplashView extends StatelessWidget {
         builder: (BuildContext context, SplashViewModel model, Widget child) =>
             Scaffold(
               body: SafeArea(
-                child: Center(
-                    child: Container(
-                      color: Colors.lightGreenAccent,
-                    )),
+                child: Container(
+                  width: double.maxFinite,
+                  height: ScreenUtil.screenHeight,
+                  color: SPLASH_COLOR,
+                  child: Center(
+                    child: Image(
+                      image: AssetImage(ImagePaths.SPLASH_LOGO),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
               ),
             ));
   }
