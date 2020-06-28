@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "418800705948-vlst6e7nr68o51dm0is4ufqh7lprmdh5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.freshover.cheffresh",
-            "certificate_hash": "e0172d29c279b032f8ee1685f862bd74adfe0ec2"
-          }
-        },
-        {
           "client_id": "418800705948-944pvv288r3otljb8m3l3c6ua7k57j49.apps.googleusercontent.com",
           "client_type": 3
         }
