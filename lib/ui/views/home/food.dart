@@ -209,12 +209,6 @@ class _MapState extends State<Map> {
   final Completer<GoogleMapController> _controller = Completer();
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MediaQuery.removePadding(
       context: context,

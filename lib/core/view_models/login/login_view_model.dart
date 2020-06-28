@@ -94,6 +94,7 @@ class LoginViewModel extends BaseModel {
   }
 
   void _codeAutoRetrievalTimeout(String verificationId) {
+    print('Phone authentication timed out');
     setBusy(false);
     smsVerificationCode = verificationId;
   }

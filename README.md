@@ -1,5 +1,5 @@
 # cheffresh [![Actions Status](https://github.com/FreshOver/cheffresh/workflows/Build%20and%20Test/badge.svg)](https://github.com/FreshOver/cheffresh/actions) <img src="https://img.shields.io/badge/made%20with-dart-blue.svg" alt="made with dart">
-This project created as a part of #Hack20 - Online International Flutter Hackathon 2020
+This project was created as a part of #Hack20 - Online International Flutter Hackathon 2020
 
 ## Summary - 140 character limit
 Home cooks are back in business, safely and efficiently! They cook food in bulk, fresh for a collection time. Neighbours reserve food.

@@ -46,7 +46,6 @@ TextStyle boldSubtitleTextStyle = GoogleFonts.poppins(
         color: DARK_COLOR,
         letterSpacing: 0.0));
 
-
 TextStyle alertMessageTextStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
         fontSize: ScreenUtil().setSp(14),
@@ -105,5 +104,5 @@ TextStyle languageSwitchTextStyle = GoogleFonts.poppins(
 
 //===== Shapes =====
 RoundedRectangleBorder roundedShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(5.0),
+    borderRadius: BorderRadius.circular(60.0),
     side: const BorderSide(color: ACCENT_COLOR));
