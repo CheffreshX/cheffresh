@@ -2,6 +2,23 @@
 
 This project created as a part of #Hack20 - Online International Flutter Hackathon 2020
 
+## Summary - 140 character limit
+Home cooks are back in business, safely and efficiently! They cook food in bulk, fresh for a collection time. Neighbours reserve food.
+
+## Additional information (e.g. technologies used, motivation) - 500 character limit
+During Covid, we’ve seen smaller businesses face a tougher time getting customers and are getting drowned by their bills. You might not see some of these restaurants after restrictions are eased. That’s a sad thing. Restaurants are inefficient because they cook food on demand, are located in non-residential areas, and have idle staff most of the day.
+
+We used Flutter and Firebase, and a whole set of plugins and packages available on pub.
+
+## Motivation
+During Covid, we’ve seen smaller businesses face a tougher time getting customers and are getting drowned by their bills. You might not see some of these restaurants after restrictions are eased. That’s a sad thing. There are economical reasons why these businesses are struggling:
+
+- they cook food on demand instead of catering,
+- they are located in non-residential areas and people are living at home, and
+- they have idle staff waiting for customers during most of the day, having peak times only 2 or 3 times a day.
+
+With Cheffresh, home cooks can run a business safely and efficiently. They cook food in bulk, fresh for a collection time. Neighbours reserve food. Cooks can measure demand for this meal, and cook only what is necessary, preventing food waste. They save time by cooking multiple meals at once. Finally, Covid is not transmittable through food and packaging, according to NCSU Professor of Food Safety Benjamin Chapman. Cheffresh helps customers stay within their neighbourhood instead of visiting high streets for food, but also get a little walking exercise. It also allows these smaller restaurant owners that have closed because of demand reasons to gradually get their business back up and running without unfurloughing staff or re-opening their high street stores.
+
 ## Folder Structure
 
 ```bash

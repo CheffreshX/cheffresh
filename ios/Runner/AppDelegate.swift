@@ -8,6 +8,9 @@ import Firebase
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    throw "Google maps API key not set up for iOS";
+    // GMSServices.provideAPIKey("YOUR KEY HERE") 
+    
    if(FirebaseApp.app() == nil){
           FirebaseApp.configure()
       }
