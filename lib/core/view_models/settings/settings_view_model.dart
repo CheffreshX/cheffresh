@@ -1,5 +1,6 @@
-import 'package:cheffresh/core/view_models/base/base_model.dart';
 import 'package:flutter/material.dart';
+
+import '../base_model.dart';
 
 class SettingsViewModel extends BaseModel {
   Future<bool> logout(BuildContext context) async {
