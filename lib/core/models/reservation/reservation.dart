@@ -7,6 +7,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:cheffresh/core/models/review/review.dart';
 import 'package:cheffresh/core/models/user/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../serializers.dart';
 
@@ -31,6 +32,9 @@ abstract class Reservation implements Built<Reservation, ReservationBuilder> {
   @nullable
   @BuiltValueField(wireName: 'reserved_count')
   int get reservedCount;
+
+  @nullable
+  GeoPoint get location;
 
   @nullable
   @BuiltValueField(wireName: 'meal_name')
