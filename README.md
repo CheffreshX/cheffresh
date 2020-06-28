@@ -1,12 +1,14 @@
 # cheffresh [![Actions Status](https://github.com/FreshOver/cheffresh/workflows/Build%20and%20Test/badge.svg)](https://github.com/FreshOver/cheffresh/actions) <img src="https://img.shields.io/badge/made%20with-dart-blue.svg" alt="made with dart">
 This project created as a part of #Hack20 - Online International Flutter Hackathon 2020
 
-#Motivation
+# Motivation
 During Covid, we’ve seen smaller businesses face a tougher time getting customers and are getting drowned by their bills. You might not see some of these restaurants after restrictions are eased. That’s a sad thing. There are economical reasons why these businesses are struggling:
 - they cook food on demand instead of catering,
 - they are located in non-residential areas and people are living at home, and
 - they have idle staff waiting for customers during most of the day, having peak times only 2 or 3 times a day.
+
 So, we made Cheffresh, a way for home cooks to get back into business, safely and efficiently. Home chefs cook food in bulk, fresh for a specific collection time. Neighbours can then reserve meals from that collection slot. Say I was a sous chef at an Egyptian restaurant in a big city, and have been on furlough or unemployed. At 12pm, I list my Falafel and Hommus wrap I want to cook and collection time on Cheffresh for 5pm. Before even cooking, I can measure demand for this meal, and cook only what is necessary, preventing food waste. I save time because I cook multiple meals at once.
+
 Finally, Covid is not transmittable through food and packaging, according to NCSU Professor of Food Safety Benjamin Chapman. Cheffresh helps customers stay within their neighbourhood instead of visiting high streets for food, but also get a little walking exercise. It also allows these smaller restaurant owners that have closed because of demand reasons to gradually get their business back up and running without unfurloughing staff or re-opening their high street stores. 
 
 ## Folder Structure
