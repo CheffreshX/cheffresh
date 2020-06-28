@@ -64,46 +64,39 @@ Providers will perform all the actual work. Api class will request and serialize
 Most of the views require their own model, they need to have a root widget Provider and a child Consumer that takes a build method. We added a BaseView that is generic that will do all this for us. 
 - We want the architecture setup to easily support calling functions when a new view is shown without having to convert everything to a stateful widget. To achieve this we converted our BaseView into a stateful widget to use the onInit to pass our model back to use in a callback function that we can execute on. We'll store the model locally in the state and in the initState call we'll check if we have a callback.
 
-## Database structure
+## Database Structure
 ### User
 ```
-Name: string
-Picture: file
-Phone: string
-Address: string
-Lat: double
-Lng: double
-added_food: array[food]
-current_orders: array[orders]
-prev_orders: array[orders]
+date_created: datetime
+name: string
+picture: file
+phone: string
+address: string
+lat: double
+lng: double
+reservations: array{Reservation_ids}
+reservations_created: array{Reservation_ids}
 ```
 
-### Food
+### Reservations
 ```
-Name: string
-Picture: array[file]
-Details: string
 date_created: datetime
+name: string
+details: string
+picture: array[images]
 price: double
-category: category
-tags: array[tags]
+category: category_id => saved locally
+tags: array{tag_id} => saved locally
+created_by: {user}
 ```
 
-### Order
+### Review
 ```
 date_created: datetime
-food_item: food
-seller: user
-buyer: user
-```
-
-### Reviews
-```
-date_created: datetime
+created_by: {user}
+created_for: {user}
 review_text: string
-rating: 1-5
-reviewer: user
-reviewee: user
+rating: double (0-5)
 ```
 
 ## Adding another model
