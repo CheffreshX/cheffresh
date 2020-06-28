@@ -19,8 +19,7 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
   var foodTags = <dynamic>[];
   final picker = ImagePicker();
   Set<Marker> markers = {};
-  GoogleMapController _googleMapController;
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   final mapKey = Key('map');
   final ValueChanged _onChanged = (val) => print(val);
