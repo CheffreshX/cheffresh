@@ -57,7 +57,6 @@ class _LoginViewState extends State<LoginView> {
                     children: <Widget>[
                       FormBuilder(
                         key: _formBuilderKey,
-                        initialValue: {'mobileNumber': countryCode.toString()},
                         autovalidate: false,
                         readOnly: false,
                         child: Column(
@@ -88,6 +87,9 @@ class _LoginViewState extends State<LoginView> {
                                   ),
                                 ),
                                 Expanded(
+                                  child: Text(countryCode.toString()),
+                                ),
+                                Expanded(
                                     flex: 3,
                                     child: FormBuilderTextField(
                                       onFieldSubmitted: (_) {
@@ -96,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
                                       autofocus: true,
                                       attribute: 'mobileNumber',
                                       decoration: InputDecoration(
-                                          hintText: '+44 7123 456789',
+                                          hintText: '7123 456789',
                                           labelStyle:
                                               TextStyle(color: Colors.indigo),
                                           labelText: 'Phone'),
