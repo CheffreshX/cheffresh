@@ -2,10 +2,13 @@ import 'package:cheffresh/core/view_models/orders/orders_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
+import 'package:cheffresh/ui/widgets/map_with_marker.dart';
 import 'package:cheffresh/ui/widgets/pill.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class DummyOrder {
@@ -57,27 +60,7 @@ class DummyOrder {
 
 List<DummyOrder> ORDERS = [
   DummyOrder(
-    DateCreated: DateTime.parse('2020-06-28 20:18:04Z'),
-    DishName: 'Fish n\' Chips',
-    Details:
-    'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
-    FoodImages: [
-      'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'
-    ],
-    FoodProviderImage:
-    'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
-    Tags: ['Vegan', 'Nut-free'],
-    DishCategory: 'Fish n\' Chips',
-    Price: 40.0,
-    FoodProviderName: 'Louis Henson',
-    FoodProviderRating: 4.5,
-    Phone: '34314233253',
-    Address: '1 Hogwarts Street',
-    Lat: 2.53,
-    Lng: 500.3,
-  ),
-  DummyOrder(
-    DateCreated: DateTime.parse('1969-07-20 20:18:04Z'),
+    DateCreated: DateTime.parse('2020-06-29 20:18:04Z'),
     DishName: 'Fish n\' Chips',
     Details:
         'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
@@ -93,8 +76,28 @@ List<DummyOrder> ORDERS = [
     FoodProviderRating: 4.5,
     Phone: '34314233253',
     Address: '1 Hogwarts Street',
-    Lat: 2.53,
-    Lng: 500.3,
+    Lat: 34.3,
+    Lng: 23.4,
+  ),
+  DummyOrder(
+    DateCreated: DateTime.parse('1969-07-20 20:18:04Z'),
+    DishName: 'Fish n\' Chips',
+    Details:
+        'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
+    FoodImages: [
+      'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'
+    ],
+    FoodProviderImage:
+    'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
+    Tags: ['Vegan', 'Nut-free'],
+    DishCategory: 'Fish n\' Chips',
+    Price: 40.0,
+    FoodProviderName: 'Louis Henson',
+    FoodProviderRating: 4.5,
+    Phone: '34314233253',
+    Address: '1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street',
+    Lat: 34.3,
+    Lng: 23.4,
   ),
 ];
 
@@ -179,7 +182,7 @@ class _OrderCardState extends State<OrderCard> {
                             children: <Widget>[
                               Text(widget.order.DishName),
                               if (hasBeenCollected(widget.order.DateCreated))
-                               Pill(
+                                Pill(
                                   '',
                                   color: ALERT_COLOR,
                                   widget: Row(
@@ -191,19 +194,22 @@ class _OrderCardState extends State<OrderCard> {
                                       )
                                     ],
                                   ),
-                               )
+                                )
                               else
-                                Pill(
-                                  '',
-                                  color: ALERT_COLOR,
-                                  widget: Row(
-                                    children: <Widget>[
-                                      Text('Call '),
-                                      Icon(
-                                        Icons.call,
-                                        size: ScreenUtil().setWidth(15),
-                                      )
-                                    ],
+                                InkWell(
+                                  onTap: _callNumber,
+                                  child: Pill(
+                                    '',
+                                    color: ALERT_COLOR,
+                                    widget: Row(
+                                      children: <Widget>[
+                                        Text('Call '),
+                                        Icon(
+                                          Icons.call,
+                                          size: ScreenUtil().setWidth(15),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                             ],
@@ -225,8 +231,11 @@ class _OrderCardState extends State<OrderCard> {
                     child: Column(
                       children: <Widget>[
                         Text(widget.order.Details),
-                        Text('Address: ' + widget.order.Address),
-                        Text('Map'),
+                        Text(
+                          'Address: ' + widget.order.Address, softWrap: true,),
+                        MapWithMarker(
+                            location:
+                            LatLng(34.3, 23.4)),
                       ],
                     ),
                   ),
@@ -265,6 +274,10 @@ class _OrderCardState extends State<OrderCard> {
       time = 'on ${orderDate.day}/${orderDate.month}/${orderDate.year}';
     }
     return time;
+  }
+
+  void _callNumber() async {
+    var res = await FlutterPhoneDirectCaller.callNumber(widget.order.Phone);
   }
 }
 

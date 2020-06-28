@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:cheffresh/ui/widgets/map_with_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -156,9 +155,8 @@ class FoodCard extends StatelessWidget {
                           )),
                     ),
                     SizedBox(height: 24),
-                    Map(
-                        location:
-                            Location(37.42796133580664, -122.085749655962)),
+                    MapWithMarker(
+                        location: LatLng(37.42796133580664, -122.085749655962)),
                     SizedBox(height: 24),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -178,70 +176,6 @@ class FoodCard extends StatelessWidget {
   }
 }
 
-class Location {
-  double lat;
-  double lon;
-
-  Location(this.lat, this.lon);
-}
-
-// ignore: must_be_immutable
-class Map extends StatefulWidget {
-  LatLng latLng;
-  CameraPosition position;
-
-  Map({
-    Key key,
-    @required Location location,
-  }) : super(key: key) {
-    latLng = LatLng(location.lat, location.lon);
-    position = CameraPosition(
-      target: latLng,
-      zoom: 14.4746,
-    );
-  }
-
-  @override
-  State<StatefulWidget> createState() => _MapState();
-}
-
-class _MapState extends State<Map> {
-  final Completer<GoogleMapController> _controller = Completer();
-
-  @override
-  Widget build(BuildContext context) {
-    return MediaQuery.removePadding(
-      context: context,
-      removeLeft: true,
-      removeRight: true,
-      child: Container(
-        height: 100,
-        // width: 100,
-        child: GoogleMap(
-          circles: {Circle(circleId: CircleId('1'))},
-          onTap: (_) {
-            print('Open the google maps navigation');
-          },
-          mapType: MapType.hybrid,
-          initialCameraPosition: widget.position,
-          zoomControlsEnabled: false,
-          zoomGesturesEnabled: false,
-          markers: {
-            Marker(
-              visible: true,
-              markerId: MarkerId('marker1'),
-              position: widget.latLng,
-              anchor: Offset(0.5, 0.5),
-            )
-          },
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-        ),
-      ),
-    );
-  }
-}
 
 class Reviews extends StatelessWidget {
   final double score = 4.5;
