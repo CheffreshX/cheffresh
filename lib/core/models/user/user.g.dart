@@ -213,54 +213,38 @@ class UserBuilder implements Builder<User, UserBuilder> {
   _$User _$v;
 
   String _name;
-
   String get name => _$this._name;
-
   set name(String name) => _$this._name = name;
 
   String _dateCreated;
-
   String get dateCreated => _$this._dateCreated;
-
   set dateCreated(String dateCreated) => _$this._dateCreated = dateCreated;
 
   String _image;
-
   String get image => _$this._image;
-
   set image(String image) => _$this._image = image;
 
   String _phone;
-
   String get phone => _$this._phone;
-
   set phone(String phone) => _$this._phone = phone;
 
   String _address;
-
   String get address => _$this._address;
-
   set address(String address) => _$this._address = address;
 
   GeoPoint _location;
-
   GeoPoint get location => _$this._location;
-
   set location(GeoPoint location) => _$this._location = location;
 
   ListBuilder<String> _reservations;
-
   ListBuilder<String> get reservations =>
       _$this._reservations ??= new ListBuilder<String>();
-
   set reservations(ListBuilder<String> reservations) =>
       _$this._reservations = reservations;
 
   ListBuilder<String> _reservations_created;
-
   ListBuilder<String> get reservations_created =>
       _$this._reservations_created ??= new ListBuilder<String>();
-
   set reservations_created(ListBuilder<String> reservations_created) =>
       _$this._reservations_created = reservations_created;
 
