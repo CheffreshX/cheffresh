@@ -1,5 +1,5 @@
 import 'package:cheffresh/core/constants/main_tab.dart';
-import 'package:cheffresh/core/providers/preferences/controller_provider.dart';
+import 'package:cheffresh/core/providers/controller/controller_provider.dart';
 import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
