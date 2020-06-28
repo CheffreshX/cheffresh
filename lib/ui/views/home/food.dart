@@ -185,14 +185,16 @@ class Location {
 }
 
 class Map extends StatefulWidget {
+  LatLng latLng;
   CameraPosition position;
 
   Map({
     Key key,
     @required Location location,
   }) : super(key: key) {
+    latLng = LatLng(location.lat, location.lon);
     position = CameraPosition(
-      target: LatLng(location.lat, location.lon),
+      target: latLng,
       zoom: 14.4746,
     );
   }
@@ -203,6 +205,12 @@ class Map extends StatefulWidget {
 
 class _MapState extends State<Map> {
   final Completer<GoogleMapController> _controller = Completer();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -225,7 +233,8 @@ class _MapState extends State<Map> {
           markers: {
             Marker(
               visible: true,
-              markerId: MarkerId('1'),
+              markerId: MarkerId('marker1'),
+              position: widget.latLng,
               anchor: Offset(0.5, 0.5),
             )
           },
@@ -243,7 +252,7 @@ class Reviews extends StatelessWidget {
   final String author = 'Dart Vader';
   //  final String description;
   final description =
-      'This satisfied my cravings for fish without causing hard to the environment. Thank you Louis. I will be back!';
+      'This satisfied my cravings for fish without causing hard to the environment. Thank you Louis. I will be back. I didn\'t like the seagulls though!';
 
   const Reviews({
     Key key,
