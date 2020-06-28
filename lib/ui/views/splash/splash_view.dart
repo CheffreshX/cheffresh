@@ -1,5 +1,5 @@
 import 'package:cheffresh/core/view_models/splash/splash_view_model.dart';
-import 'package:cheffresh/ui/views/base/base_view.dart';
+import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

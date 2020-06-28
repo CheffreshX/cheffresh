@@ -1,3 +1,3 @@
-import 'package:cheffresh/ui/views/base/base_model.dart';
+import 'package:cheffresh/core/view_models/base_model.dart';
 
 class HomeViewModel extends BaseModel {}
