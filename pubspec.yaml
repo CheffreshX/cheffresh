@@ -41,6 +41,7 @@ dependencies:
   flutter_form_builder:
   country_code_picker: ^1.4.0
   firebase_auth: ^0.16.1
+  image_picker: ^0.6.7+2
   google_maps_flutter: ^0.5.28+1
   google_map_location_picker: ^3.3.3
 
