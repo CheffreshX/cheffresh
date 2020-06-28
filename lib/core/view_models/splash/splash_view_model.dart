@@ -16,7 +16,7 @@ class SplashViewModel extends BaseModel {
       await Future.delayed(Duration(seconds: 3)).whenComplete(() =>
           unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Home)));
     } else {
-      unawaited(_navigationService.pushNamed(RoutePaths.Login));
+      unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Login));
     }
   }
 }
