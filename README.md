@@ -83,11 +83,12 @@ reservations_created: array{Reservation_ids}
 date_created: datetime
 name: string
 details: string
-picture: array[images]
+picture: array{images}
 price: double
 category: category_id => saved locally
 tags: array{tag_id} => saved locally
 created_by: {user}
+review_snippets: array[4]{reviews}
 ```
 
 ### Review
