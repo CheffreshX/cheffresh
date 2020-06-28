@@ -1,7 +1,8 @@
 import 'package:cheffresh/ui/shared/styles.dart';
 import 'package:flutter/material.dart';
 
-AppBar defaultAppBar({String title, VoidCallback onPressed, List<Widget> actions}) {
+AppBar defaultAppBar(
+    {String title, VoidCallback onPressed, List<Widget> actions}) {
   return AppBar(
     backgroundColor: Colors.transparent,
     elevation: 0,
