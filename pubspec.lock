@@ -246,7 +246,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.9"
-<<<<<<< HEAD
   equatable:
     dependency: transitive
     description:
@@ -261,8 +260,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-=======
->>>>>>> c5fafa86b574fa407523510ac805a94f43e7cba6
   file:
     dependency: transitive
     description:
