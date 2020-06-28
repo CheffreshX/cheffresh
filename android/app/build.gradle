@@ -8,7 +8,7 @@ if (localPropertiesFile.exists()) {
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+    throw GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -41,7 +41,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.freshover.cheffresh"
-        manifestPlaceholders = [GOOGLE_CLOUD_API_KEY: System.getenv("GOOGLE_CLOUD_API_KEY")]
+        manifestPlaceholders = [GOOGLE_CLOUD_API_KEY: "$System.env.GOOGLE_CLOUD_API_KEY"]
         minSdkVersion 21
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
