@@ -81,6 +81,9 @@ reservations_created: array{Reservation_ids}
 ### Reservations
 ```
 date_created: datetime
+isFull: bool
+totalCount: int
+reservedCount: int
 name: string
 details: string
 picture: array{images}

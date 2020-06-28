@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "418800705948-t0rjcbllr8n2gjbvsb098te55tajlvll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshover.cheffresh",
+            "certificate_hash": "fede74d6d0592f958316f77a53480906dea67c6f"
+          }
+        },
+        {
+          "client_id": "418800705948-l3q778ptqpp399j7rldpdhre4mhd2i04.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshover.cheffresh",
+            "certificate_hash": "cfc471be59b2d51a7bad29b5420426a9cceb841d"
+          }
+        },
+        {
           "client_id": "418800705948-944pvv288r3otljb8m3l3c6ua7k57j49.apps.googleusercontent.com",
           "client_type": 3
         }
