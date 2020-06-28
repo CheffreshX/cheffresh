@@ -76,11 +76,9 @@ class _HomeViewState extends State<HomeView> {
       showUnselectedLabels: false,
       selectedItemColor: BLUE_COLOR,
       currentIndex: _currentTab.index,
-      onTap: (index) =>
-          Provider
-              .of<ControllerProvider>(context, listen: false)
-              .mainScreenController
-              .jumpToPage(index),
+      onTap: (index) => Provider.of<ControllerProvider>(context, listen: false)
+          .mainScreenController
+          .jumpToPage(index),
       selectedFontSize: ScreenUtil().setSp(12),
       unselectedFontSize: ScreenUtil().setSp(12),
     );
