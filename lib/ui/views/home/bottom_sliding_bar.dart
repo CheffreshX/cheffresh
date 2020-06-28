@@ -47,7 +47,7 @@ class BottomSlidingBar extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30.0)),
           child: Center(
-            child: Text('Reserve'),
+            child: Text('Reserve for 4.50'),
           ),
         ),
       ),
