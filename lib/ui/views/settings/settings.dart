@@ -38,7 +38,9 @@ class SettingsView extends StatelessWidget {
                                   title: Text(
                                     'Logout',
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    model.logout();
+                                  },
                                 ),
                               ]).toList(),
                         ),
