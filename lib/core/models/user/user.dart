@@ -27,6 +27,10 @@ abstract class User implements Built<User, UserBuilder> {
   String get image;
 
   @nullable
+  @BuiltValueField(wireName: 'health_certificate')
+  String get healthCertificate;
+
+  @nullable
   String get phone;
 
   @nullable

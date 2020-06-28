@@ -25,27 +25,24 @@ class _$UserSerializer implements StructuredSerializer<User> {
             specifiedType: const FullType(String)));
     }
     if (object.dateCreated != null) {
-      result
-        ..add('date_created')
-        ..add(serializers.serialize(object.dateCreated,
-            specifiedType: const FullType(String)));
+      result..add('date_created')..add(serializers.serialize(object.dateCreated,
+          specifiedType: const FullType(String)));
     }
     if (object.image != null) {
-      result
-        ..add('image')
-        ..add(serializers.serialize(object.image,
-            specifiedType: const FullType(String)));
+      result..add('image')..add(serializers.serialize(object.image,
+          specifiedType: const FullType(String)));
+    }
+    if (object.healthCertificate != null) {
+      result..add('health_certificate')..add(
+          serializers.serialize(object.healthCertificate,
+              specifiedType: const FullType(String)));
     }
     if (object.phone != null) {
-      result
-        ..add('phone')
-        ..add(serializers.serialize(object.phone,
-            specifiedType: const FullType(String)));
+      result..add('phone')..add(serializers.serialize(object.phone,
+          specifiedType: const FullType(String)));
     }
     if (object.address != null) {
-      result
-        ..add('address')
-        ..add(serializers.serialize(object.address,
+      result..add('address')..add(serializers.serialize(object.address,
             specifiedType: const FullType(String)));
     }
     if (object.location != null) {
@@ -94,6 +91,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
           result.image = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'health_certificate':
+          result.healthCertificate = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'phone':
           result.phone = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -133,6 +134,8 @@ class _$User extends User {
   @override
   final String image;
   @override
+  final String healthCertificate;
+  @override
   final String phone;
   @override
   final String address;
@@ -150,6 +153,7 @@ class _$User extends User {
       {this.name,
       this.dateCreated,
       this.image,
+      this.healthCertificate,
       this.phone,
       this.address,
       this.location,
@@ -171,6 +175,7 @@ class _$User extends User {
         name == other.name &&
         dateCreated == other.dateCreated &&
         image == other.image &&
+        healthCertificate == other.healthCertificate &&
         phone == other.phone &&
         address == other.address &&
         location == other.location &&
@@ -185,8 +190,12 @@ class _$User extends User {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, name.hashCode), dateCreated.hashCode),
-                            image.hashCode),
+                        $jc(
+                            $jc(
+                                $jc($jc(0, name.hashCode),
+                                    dateCreated.hashCode),
+                                image.hashCode),
+                            healthCertificate.hashCode),
                         phone.hashCode),
                     address.hashCode),
                 location.hashCode),
@@ -198,9 +207,8 @@ class _$User extends User {
   String toString() {
     return (newBuiltValueToStringHelper('User')
           ..add('name', name)
-          ..add('dateCreated', dateCreated)
-          ..add('image', image)
-          ..add('phone', phone)
+          ..add('dateCreated', dateCreated)..add('image', image)..add(
+          'healthCertificate', healthCertificate)..add('phone', phone)
           ..add('address', address)
           ..add('location', location)
           ..add('reservations', reservations)
@@ -214,22 +222,38 @@ class UserBuilder implements Builder<User, UserBuilder> {
 
   String _name;
   String get name => _$this._name;
+
   set name(String name) => _$this._name = name;
 
   String _dateCreated;
+
   String get dateCreated => _$this._dateCreated;
+
   set dateCreated(String dateCreated) => _$this._dateCreated = dateCreated;
 
   String _image;
+
   String get image => _$this._image;
+
   set image(String image) => _$this._image = image;
 
+  String _healthCertificate;
+
+  String get healthCertificate => _$this._healthCertificate;
+
+  set healthCertificate(String healthCertificate) =>
+      _$this._healthCertificate = healthCertificate;
+
   String _phone;
+
   String get phone => _$this._phone;
+
   set phone(String phone) => _$this._phone = phone;
 
   String _address;
+
   String get address => _$this._address;
+
   set address(String address) => _$this._address = address;
 
   GeoPoint _location;
@@ -255,6 +279,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
       _name = _$v.name;
       _dateCreated = _$v.dateCreated;
       _image = _$v.image;
+      _healthCertificate = _$v.healthCertificate;
       _phone = _$v.phone;
       _address = _$v.address;
       _location = _$v.location;
@@ -287,6 +312,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
               name: name,
               dateCreated: dateCreated,
               image: image,
+              healthCertificate: healthCertificate,
               phone: phone,
               address: address,
               location: location,

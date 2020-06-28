@@ -31,8 +31,10 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
             specifiedType: const FullType(bool)));
     }
     if (object.totalCount != null) {
-      result..add('total_count')..add(serializers.serialize(object.totalCount,
-          specifiedType: const FullType(int)));
+      result
+        ..add('total_count')
+        ..add(serializers.serialize(object.totalCount,
+            specifiedType: const FullType(int)));
     }
     if (object.reservedCount != null) {
       result..add('reserved_count')..add(
@@ -49,7 +51,7 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
     }
     if (object.category != null) {
       result..add('category')..add(serializers.serialize(object.category,
-            specifiedType: const FullType(String)));
+          specifiedType: const FullType(String)));
     }
     if (object.tags != null) {
       result
@@ -297,37 +299,26 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
 
   bool _isFull;
   bool get isFull => _$this._isFull;
-
   set isFull(bool isFull) => _$this._isFull = isFull;
 
   int _totalCount;
-
   int get totalCount => _$this._totalCount;
-
   set totalCount(int totalCount) => _$this._totalCount = totalCount;
 
   int _reservedCount;
-
   int get reservedCount => _$this._reservedCount;
-
   set reservedCount(int reservedCount) => _$this._reservedCount = reservedCount;
 
   GeoPoint _location;
-
   GeoPoint get location => _$this._location;
-
   set location(GeoPoint location) => _$this._location = location;
 
   String _mealName;
-
   String get mealName => _$this._mealName;
-
   set mealName(String mealName) => _$this._mealName = mealName;
 
   String _category;
-
   String get category => _$this._category;
-
   set category(String category) => _$this._category = category;
 
   ListBuilder<String> _tags;
