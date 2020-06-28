@@ -1,8 +1,10 @@
+import 'package:cheffresh/core/models/user/user.dart';
 import 'package:cheffresh/core/view_models/orders/orders_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cheffresh/ui/widgets/pill.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,12 +62,12 @@ List<DummyOrder> ORDERS = [
     DateCreated: DateTime.parse('2020-06-28 20:18:04Z'),
     DishName: 'Fish n\' Chips',
     Details:
-        'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
+    'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
     FoodImages: [
       'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'
     ],
     FoodProviderImage:
-        'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
+    'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
     Tags: ['Vegan', 'Nut-free'],
     DishCategory: 'Fish n\' Chips',
     Price: 40.0,
@@ -80,12 +82,12 @@ List<DummyOrder> ORDERS = [
     DateCreated: DateTime.parse('1969-07-20 20:18:04Z'),
     DishName: 'Fish n\' Chips',
     Details:
-    'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
+        'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
     FoodImages: [
       'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'
     ],
     FoodProviderImage:
-    'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
+        'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
     Tags: ['Vegan', 'Nut-free'],
     DishCategory: 'Fish n\' Chips',
     Price: 40.0,
@@ -109,18 +111,18 @@ class OrdersView extends StatelessWidget {
               body: SafeArea(
                   child: model.busy
                       ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
+                    child: CircularProgressIndicator(),
+                  )
                       : ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: ORDERS.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return OrderCard(
-                              order: ORDERS[index],
-                            );
-                          },
-                        )),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: ORDERS.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return OrderCard(
+                        order: ORDERS[index],
+                      );
+                    },
+                  )),
             ));
   }
 }
@@ -179,17 +181,40 @@ class _OrderCardState extends State<OrderCard> {
                             children: <Widget>[
                               Text(widget.order.DishName),
                               if (hasBeenCollected(widget.order.DateCreated))
-                                Pill(
-                                  '',
-                                  color: ALERT_COLOR,
-                                  widget: Row(
-                                    children: <Widget>[
-                                      Text('Add Review '),
-                                      Icon(
-                                        Icons.rate_review,
-                                        size: ScreenUtil().setWidth(15),
-                                      )
-                                    ],
+                                InkWell(
+                                  onTap: () {
+                                    final userModel = User((UserBuilder b) =>
+                                    b
+                                      ..name = 'user@test.com'
+                                      ..reservations.addAll(
+                                          ['John', 'Sophia', 'Dave', 'Linda'])
+                                      ..location = GeoPoint(2.3, 4.3));
+//
+//      var copiedUserModel = userModel.rebuild((b) => b
+//        ..phone = '0123123');
+//
+                                    print(userModel);
+//      print(copiedUserModel);
+
+                                    final userModelJson = userModel.toJson();
+                                    print('json:' + userModelJson);
+
+                                    final userModelFromJson =
+                                    User.fromJson(userModelJson);
+                                    print(userModelFromJson);
+                                  },
+                                  child: Pill(
+                                    '',
+                                    color: ALERT_COLOR,
+                                    widget: Row(
+                                      children: <Widget>[
+                                        Text('Add Review '),
+                                        Icon(
+                                          Icons.rate_review,
+                                          size: ScreenUtil().setWidth(15),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 )
                               else

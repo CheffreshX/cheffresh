@@ -1,16 +1,25 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:cheffresh/main.dart';
+import 'package:cheffresh/core/models/user/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  group('Login Model', () {
+    test('mapping login request to json', () {
+      //mocking the mobile side
+      final userModel = User((UserBuilder b) => b
+        ..name = 'user@test.com'
+        ..reservations.addAll(['John', 'Sophia', 'Dave', 'Linda']));
+//
+//      var copiedUserModel = userModel.rebuild((b) => b
+//        ..phone = '0123123');
+//
+      print(userModel);
+//      print(copiedUserModel);
+
+      final userModelJson = userModel.toJson();
+      print(userModelJson);
+
+      final userModelFromJson = User.fromJson(userModelJson);
+      print(userModelFromJson);
+    });
   });
 }

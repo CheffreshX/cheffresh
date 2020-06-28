@@ -1,4 +1,4 @@
-import 'package:cheffresh/core/constants/api_constants.dart';
+import 'package:cheffresh/core/constants/firebase_constants.dart';
 import 'package:cheffresh/core/constants/routes.dart';
 import 'package:cheffresh/core/services/navigation/navigation_service.dart';
 import 'package:cheffresh/core/view_models/base_model.dart';
@@ -15,7 +15,7 @@ class SettingsViewModel extends BaseModel {
     setBusy(true);
     await FirebaseAuth.instance.signOut();
     final pref = await SharedPreferences.getInstance();
-    await pref.remove(CUSTOMER_ID);
+    await pref.remove(FIREBASE_ID);
     setBusy(false);
     unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Login));
     return true;

@@ -1,4 +1,4 @@
-import 'package:cheffresh/core/constants/api_constants.dart';
+import 'package:cheffresh/core/constants/firebase_constants.dart';
 import 'package:cheffresh/core/constants/routes.dart';
 import 'package:cheffresh/core/services/navigation/navigation_service.dart';
 import 'package:cheffresh/core/view_models/base_model.dart';
@@ -37,13 +37,19 @@ class LoginViewModel extends BaseModel {
         .signInWithCredential(authCredential)
         .then((authResult) {
       saveUserId(authResult.user.uid);
-      _navigationService.popAllAndPushNamed(RoutePaths.Home);
+
+      if (authResult.additionalUserInfo.isNewUser) {
+        //TO-DO Navigate to sign up screen to fill data: Picture/Name/Location
+        //register
+      } else {
+        _navigationService.popAllAndPushNamed(RoutePaths.Home);
+      }
     });
   }
 
   Future<void> saveUserId(String id) async {
     var pref = await SharedPreferences.getInstance();
-    await pref.setString(CUSTOMER_ID, id);
+    await pref.setString(FIREBASE_ID, id);
   }
 
   Future<bool> smsCodeDialog() {

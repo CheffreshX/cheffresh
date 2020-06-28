@@ -45,7 +45,6 @@ class _LoginViewState extends State<LoginView> {
         return Scaffold(
           appBar: defaultAppBar(
             title: 'Login',
-            onPressed: () => model.pop(context),
           ),
           resizeToAvoidBottomPadding: true,
           body: model.busy
