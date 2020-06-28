@@ -1,8 +1,9 @@
 import 'package:cheffresh/core/constants/routes.dart';
+import 'package:cheffresh/ui/views/add_food_item/add_food_item_view.dart';
 import 'package:cheffresh/ui/views/home/home_view.dart';
 import 'package:cheffresh/ui/views/identity/login/login_view.dart';
 import 'package:cheffresh/ui/views/splash/splash_view.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 const String initialRoute = 'Splash Screen';
 
@@ -11,5 +12,6 @@ class Router {
         initialRoute: (BuildContext context) => SplashView(),
         RoutePaths.Login: (BuildContext context) => LoginView(),
         RoutePaths.Home: (BuildContext context) => HomeView(),
+        RoutePaths.AddFood: (BuildContext context) => AddFoodItemView(),
       };
 }
