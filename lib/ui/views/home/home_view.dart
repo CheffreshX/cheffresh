@@ -3,7 +3,7 @@ import 'package:cheffresh/core/providers/controller/controller_provider.dart';
 import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
-import 'package:cheffresh/ui/views/home/food.dart';
+import 'package:cheffresh/ui/views/food/food_view.dart';
 import 'package:cheffresh/ui/views/orders/orders_view.dart';
 import 'package:cheffresh/ui/views/settings/settings.dart';
 import 'package:flutter/cupertino.dart';

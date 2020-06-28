@@ -31,27 +31,24 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
             specifiedType: const FullType(bool)));
     }
     if (object.totalCount != null) {
-      result
-        ..add('total_count')
-        ..add(serializers.serialize(object.totalCount,
-            specifiedType: const FullType(int)));
+      result..add('total_count')..add(serializers.serialize(object.totalCount,
+          specifiedType: const FullType(int)));
     }
     if (object.reservedCount != null) {
-      result
-        ..add('reserved_count')
-        ..add(serializers.serialize(object.reservedCount,
-            specifiedType: const FullType(int)));
+      result..add('reserved_count')..add(
+          serializers.serialize(object.reservedCount,
+              specifiedType: const FullType(int)));
+    }
+    if (object.location != null) {
+      result..add('location')..add(serializers.serialize(object.location,
+          specifiedType: const FullType(GeoPoint)));
     }
     if (object.mealName != null) {
-      result
-        ..add('meal_name')
-        ..add(serializers.serialize(object.mealName,
-            specifiedType: const FullType(String)));
+      result..add('meal_name')..add(serializers.serialize(object.mealName,
+          specifiedType: const FullType(String)));
     }
     if (object.category != null) {
-      result
-        ..add('category')
-        ..add(serializers.serialize(object.category,
+      result..add('category')..add(serializers.serialize(object.category,
             specifiedType: const FullType(String)));
     }
     if (object.tags != null) {
@@ -76,8 +73,9 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
     }
     if (object.createBy != null) {
       result
-        ..add('created_by')..add(serializers.serialize(object.createBy,
-          specifiedType: const FullType(User)));
+        ..add('created_by')
+        ..add(serializers.serialize(object.createBy,
+            specifiedType: const FullType(User)));
     }
     if (object.pictures != null) {
       result..add('pictures')..add(serializers.serialize(object.pictures,
@@ -118,6 +116,10 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
         case 'reserved_count':
           result.reservedCount = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+        case 'location':
+          result.location = serializers.deserialize(value,
+              specifiedType: const FullType(GeoPoint)) as GeoPoint;
           break;
         case 'meal_name':
           result.mealName = serializers.deserialize(value,
@@ -176,6 +178,8 @@ class _$Reservation extends Reservation {
   @override
   final int reservedCount;
   @override
+  final GeoPoint location;
+  @override
   final String mealName;
   @override
   final String category;
@@ -200,6 +204,7 @@ class _$Reservation extends Reservation {
     this.isFull,
     this.totalCount,
     this.reservedCount,
+    this.location,
     this.mealName,
     this.category,
     this.tags,
@@ -212,10 +217,13 @@ class _$Reservation extends Reservation {
 
   @override
   Reservation rebuild(void Function(ReservationBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+      (toBuilder()
+        ..update(updates)).build();
 
   @override
-  ReservationBuilder toBuilder() => new ReservationBuilder()..replace(this);
+  ReservationBuilder toBuilder() =>
+      new ReservationBuilder()
+        ..replace(this);
 
   @override
   bool operator ==(Object other) {
@@ -225,6 +233,7 @@ class _$Reservation extends Reservation {
         isFull == other.isFull &&
         totalCount == other.totalCount &&
         reservedCount == other.reservedCount &&
+        location == other.location &&
         mealName == other.mealName &&
         category == other.category &&
         tags == other.tags &&
@@ -247,10 +256,14 @@ class _$Reservation extends Reservation {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, dateCreated.hashCode),
-                                                isFull.hashCode),
-                                            totalCount.hashCode),
-                                        reservedCount.hashCode),
+                                            $jc(
+                                                $jc(
+                                                    $jc(0,
+                                                        dateCreated.hashCode),
+                                                    isFull.hashCode),
+                                                totalCount.hashCode),
+                                            reservedCount.hashCode),
+                                        location.hashCode),
                                     mealName.hashCode),
                                 category.hashCode),
                             tags.hashCode),
@@ -266,8 +279,9 @@ class _$Reservation extends Reservation {
     return (newBuiltValueToStringHelper('Reservation')
       ..add('dateCreated', dateCreated)..add('isFull', isFull)..add(
           'totalCount', totalCount)..add('reservedCount', reservedCount)..add(
-          'mealName', mealName)..add('category', category)..add(
-          'tags', tags)..add('details', details)..add('price', price)..add(
+          'location', location)..add('mealName', mealName)..add(
+          'category', category)..add('tags', tags)..add(
+          'details', details)..add('price', price)..add(
           'createBy', createBy)..add('pictures', pictures)..add(
           'reviews', reviews))
         .toString();
@@ -283,22 +297,37 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
 
   bool _isFull;
   bool get isFull => _$this._isFull;
+
   set isFull(bool isFull) => _$this._isFull = isFull;
 
   int _totalCount;
+
   int get totalCount => _$this._totalCount;
+
   set totalCount(int totalCount) => _$this._totalCount = totalCount;
 
   int _reservedCount;
+
   int get reservedCount => _$this._reservedCount;
+
   set reservedCount(int reservedCount) => _$this._reservedCount = reservedCount;
 
+  GeoPoint _location;
+
+  GeoPoint get location => _$this._location;
+
+  set location(GeoPoint location) => _$this._location = location;
+
   String _mealName;
+
   String get mealName => _$this._mealName;
+
   set mealName(String mealName) => _$this._mealName = mealName;
 
   String _category;
+
   String get category => _$this._category;
+
   set category(String category) => _$this._category = category;
 
   ListBuilder<String> _tags;
@@ -315,23 +344,17 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
   set price(double price) => _$this._price = price;
 
   UserBuilder _createBy;
-
   UserBuilder get createBy => _$this._createBy ??= new UserBuilder();
-
   set createBy(UserBuilder createBy) => _$this._createBy = createBy;
 
   ListBuilder<String> _pictures;
-
   ListBuilder<String> get pictures =>
       _$this._pictures ??= new ListBuilder<String>();
-
   set pictures(ListBuilder<String> pictures) => _$this._pictures = pictures;
 
   ListBuilder<Review> _reviews;
-
   ListBuilder<Review> get reviews =>
       _$this._reviews ??= new ListBuilder<Review>();
-
   set reviews(ListBuilder<Review> reviews) => _$this._reviews = reviews;
 
   ReservationBuilder();
@@ -342,6 +365,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
       _isFull = _$v.isFull;
       _totalCount = _$v.totalCount;
       _reservedCount = _$v.reservedCount;
+      _location = _$v.location;
       _mealName = _$v.mealName;
       _category = _$v.category;
       _tags = _$v.tags?.toBuilder();
@@ -378,6 +402,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
               isFull: isFull,
               totalCount: totalCount,
               reservedCount: reservedCount,
+              location: location,
               mealName: mealName,
               category: category,
               tags: _tags?.build(),
