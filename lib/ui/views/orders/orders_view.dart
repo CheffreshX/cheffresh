@@ -277,7 +277,7 @@ class _OrderCardState extends State<OrderCard> {
   }
 
   void _callNumber() async {
-    var res = await FlutterPhoneDirectCaller.callNumber(widget.order.Phone);
+    await FlutterPhoneDirectCaller.callNumber(widget.order.Phone);
   }
 }
 
