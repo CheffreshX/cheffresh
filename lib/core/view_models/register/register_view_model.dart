@@ -10,9 +10,7 @@ class RegisterViewModel extends BaseModel {
     Map<String, dynamic> form,
     File image,
   ) async {
-    await _uploadFile(image, form['Name']).then((value) {
-      print(value);
-    });
+ var imageUrl = await _uploadFile(image, form['Name']);
   }
 
   Future<String> _uploadFile(File file, String filename) async {

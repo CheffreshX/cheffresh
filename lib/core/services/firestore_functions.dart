@@ -1,4 +1,5 @@
 import 'package:cheffresh/core/models/reservation/reservation.dart';
+import 'package:cheffresh/core/models/user/user.dart';
 import 'package:cheffresh/locator_setup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,12 @@ class FirestoreFunctions extends ChangeNotifier {
   }
 
   Future addReservation(Reservation data) async {
+    var result = await _api.addDocument(data.toMap());
+    print(result);
+    return;
+  }
+
+  Future addUser(User data) async {
     var result = await _api.addDocument(data.toMap());
     print(result);
     return;
