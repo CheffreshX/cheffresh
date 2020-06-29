@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:cheffresh/core/constants/api_keys.dart';
 import 'package:cheffresh/core/view_models/register/register_view_model.dart';
 import 'package:cheffresh/ui/shared/loading.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
@@ -280,8 +281,8 @@ class _RegisterViewState extends State<RegisterView> {
                                   borderRadius: BorderRadius.circular(10)),
                               color: Colors.orange[700],
                               onPressed: () async {
-                                result = await showLocationPicker(context,
-                                    'AIzaSyBl9ifEBx9VDw3TswNpD1GGm8ZH2NJhyeo');
+                                result = await showLocationPicker(
+                                    context, MAP_API_KEY);
                                 setState(() {});
                               },
                             ),
@@ -300,6 +301,7 @@ class _RegisterViewState extends State<RegisterView> {
                                       color: Colors.white, fontSize: 20),
                                 ),
                                 onPressed: () {
+                                  FocusScope.of(context).unfocus();
                                   if (_fbKey.currentState.saveAndValidate() &&
                                       result != null) {
                                     model.register(result.latLng,

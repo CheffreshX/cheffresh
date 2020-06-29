@@ -138,6 +138,7 @@ class _LoginViewState extends State<LoginView> {
                                     TextStyle(color: Colors.white, fontSize: 20),
                               ),
                               onPressed: () {
+                                FocusScope.of(context).unfocus();
                                 login(model);
                               }),
                         ),
@@ -160,6 +161,7 @@ class _LoginViewState extends State<LoginView> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                   onTap: () {
+                                    FocusScope.of(context).unfocus();
                                     model.goTo(context,
                                         path: RoutePaths.Register);
                                   }),
