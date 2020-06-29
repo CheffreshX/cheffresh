@@ -146,7 +146,9 @@ class _RegisterViewState extends State<RegisterView> {
                                     Container(
                                       padding: EdgeInsets.all(2),
                                       decoration: BoxDecoration(
-                                        color: Colors.green,
+                                        color: personImage != null
+                                            ? Colors.green
+                                            : Colors.white,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: ClipRRect(

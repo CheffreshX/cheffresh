@@ -17,7 +17,7 @@ TextStyle appBarTextStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
         fontSize: ScreenUtil().setSp(16),
         fontWeight: FontWeight.w500,
-        color: DARK_GREY_COLOR,
+        color: Colors.green,
         letterSpacing: 0.0));
 
 TextStyle smallHeaderTextStyle = GoogleFonts.poppins(
