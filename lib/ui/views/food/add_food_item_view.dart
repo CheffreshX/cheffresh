@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/services/firestore_functions.dart';
 
 class AddFoodItemView extends StatefulWidget {
   @override
@@ -37,7 +40,8 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
   @override
   Widget build(BuildContext context) {
     return BaseView<AddFoodItemViewModel>(
-        model: AddFoodItemViewModel(),
+        model: AddFoodItemViewModel(
+            provider: Provider.of<FirestoreFunctions>(context)),
         builder: (BuildContext context, AddFoodItemViewModel model,
                 Widget child) =>
             Scaffold(

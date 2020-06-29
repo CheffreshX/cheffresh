@@ -9,18 +9,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../../locator_setup.dart';
+import '../../services/firestore_functions.dart';
 
 class AddFoodItemViewModel extends BaseModel {
   final _navigationService = locator<NavigationService>();
+  final FirestoreFunctions provider;
+
+  AddFoodItemViewModel({this.provider});
 
   Future<void> addFoodItem({
     Map<String, dynamic> form,
     List<File> foodItemImages,
     GeoPoint location,
   }) async {
-    //Step #1: TO-DO upload images to fire storage
-    //and get List<String> Urls
-    //List<String> urls;
     setBusy(true);
     var urls = await _uploadFiles(foodItemImages);
     var reservation = Reservation((ReservationBuilder b) => b
@@ -36,8 +37,7 @@ class AddFoodItemViewModel extends BaseModel {
       ..tags.addAll(List<String>.from(form['food_tags']))
       ..pictures.addAll(urls)
       ..price = double.parse(form['price']));
-
-    //save this to firebase!
+    await provider.addReservation(reservation);
     setBusy(false);
     print(reservation);
   }

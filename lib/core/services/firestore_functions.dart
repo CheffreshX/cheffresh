@@ -4,6 +4,7 @@ import 'package:cheffresh/locator_setup.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/firebase_constants.dart';
 import 'api.dart';
 
 class FirestoreFunctions extends ChangeNotifier {
@@ -13,7 +14,7 @@ class FirestoreFunctions extends ChangeNotifier {
   List<Reservation> orders;
 
   Future<List<Reservation>> fetchOrders() async {
-    var result = await _api.getDataCollection();
+    var result = await _api.getDataCollection(FirestorePaths.RESERVATION_PATH);
     orders = result.documents
         .map((doc) => Reservation.fromMap(doc.data, doc.documentID))
         .toList();
@@ -39,17 +40,18 @@ class FirestoreFunctions extends ChangeNotifier {
   }
 
   Stream<QuerySnapshot> fetchReservationsAsStream() {
-    return _api.streamDataCollection();
+    return _api.streamDataCollection(FirestorePaths.RESERVATION_PATH);
   }
 
   Future addReservation(Reservation data) async {
-    var result = await _api.addDocument(data.toMap());
+    var result =
+        await _api.addDocument(data.toMap(), FirestorePaths.RESERVATION_PATH);
     print(result);
     return;
   }
 
   Future addUser(User data) async {
-    var result = await _api.addDocument(data.toMap());
+    var result = await _api.addDocument(data.toMap(), FirestorePaths.USER_PATH);
     print(result);
     return;
   }
