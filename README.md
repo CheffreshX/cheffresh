@@ -1,7 +1,10 @@
 # cheffresh [![Actions Status](https://github.com/FreshOver/cheffresh/workflows/Build%20and%20Test/badge.svg)](https://github.com/FreshOver/cheffresh/actions) <img src="https://img.shields.io/badge/made%20with-dart-blue.svg" alt="made with dart">
 This project was created as a part of #Hack20 - Online International Flutter Hackathon 2020
 
+## [YouTube video](https://www.youtube.com/watch?v=zl8voaFNOcE)
 [![Cheffresh video](https://img.youtube.com/vi/zl8voaFNOcE/0.jpg)](https://www.youtube.com/watch?v=zl8voaFNOcE)
+
+Figma UI designs can be found [here](https://www.figma.com/file/zVom2lCrhgUfTJTTANT8f9/Cheffresh-for-Flutter-Hack-2020?node-id=0%3A1)
 
 ## Summary - 140 character limit
 Home cooks can get back in business, safely and efficiently. They cook food in bulk, fresh for a collection time. Neighbours reserve food.
