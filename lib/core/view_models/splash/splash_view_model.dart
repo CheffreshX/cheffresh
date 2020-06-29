@@ -1,9 +1,8 @@
-import 'package:cheffresh/core/constants/firebase_constants.dart';
 import 'package:cheffresh/core/constants/routes.dart';
 import 'package:cheffresh/core/services/navigation/navigation_service.dart';
 import 'package:cheffresh/core/view_models/base_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pedantic/pedantic.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../locator_setup.dart';
 
@@ -11,11 +10,13 @@ class SplashViewModel extends BaseModel {
   final _navigationService = locator<NavigationService>();
 
   Future<void> onReady() async {
-    var pref = await SharedPreferences.getInstance();
-    if (pref.containsKey(FIREBASE_ID)) {
-      await Future.delayed(Duration(seconds: 3)).whenComplete(() =>
-          unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Home)));
+    setBusy(true);
+    var isLoggedIn = await FirebaseAuth.instance.currentUser() != null;
+    if (isLoggedIn) {
+      setBusy(false);
+      unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Home));
     } else {
+      setBusy(false);
       unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Login));
     }
   }

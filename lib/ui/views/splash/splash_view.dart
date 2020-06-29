@@ -25,6 +25,9 @@ class SplashView extends StatelessWidget {
                   child: Center(
                     child: Column(
                       children: <Widget>[
+                        SizedBox(
+                          height: ScreenUtil.screenHeight / 30,
+                        ),
                         Image(
                           image: AssetImage(ImagePaths.SPLASH_LOGO),
                           fit: BoxFit.contain,
