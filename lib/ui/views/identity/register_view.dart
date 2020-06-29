@@ -218,21 +218,35 @@ class _RegisterViewState extends State<RegisterView> {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(width: 12),
-                                        RaisedButton(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          color: Colors.red,
-                                          onPressed: () {
-                                            setState(() {
-                                              personImage = null;
-                                            });
-                                          },
-                                          child: Icon(Icons.delete_forever,
-                                              color: Colors.white),
-                                        ),
                                       ],
+                                    ),
+                                    Container(
+                                      width: 175,
+                                      child: RaisedButton(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        color: Colors.red,
+                                        onPressed: () {
+                                          setState(() {
+                                            personImage = null;
+                                          });
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Icon(Icons.delete_forever,
+                                                color: Colors.white),
+                                            SizedBox(width: 12),
+                                            Text(
+                                              'Delete',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                     SizedBox(height: 15),
                                   ],
