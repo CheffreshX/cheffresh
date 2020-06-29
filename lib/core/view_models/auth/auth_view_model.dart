@@ -130,7 +130,7 @@ class AuthViewModel extends BaseModel {
 
     var isSuccess =
         await Provider.of<FirestoreFunctions>(context, listen: false)
-            .addUser(newUser);
+            .addUser(newUser, uid);
     if (isSuccess) await _navigationService.popAllAndPushNamed(RoutePaths.Home);
     setBusy(false);
   }

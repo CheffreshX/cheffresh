@@ -53,8 +53,8 @@ class FirestoreFunctions extends ChangeNotifier {
     return;
   }
 
-  Future<bool> addUser(User data) async {
-    var result = await _api.addDocument(data.toMap(), FirestorePaths.USER_PATH);
-    return result != null;
+  Future<bool> addUser(User data, String uid) async {
+    await _api.updateDocument(data.toMap(), uid, FirestorePaths.USER_PATH);
+    return true;
   }
 }
