@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+// ignore: must_be_immutable
 class BottomSlidingBar extends StatelessWidget {
   BottomSlidingBar({Key key, @required this.body, this.price})
       : super(key: key);

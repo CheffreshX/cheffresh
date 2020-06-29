@@ -9,13 +9,14 @@ class FirestoreFunctions extends ChangeNotifier {
   final Api _api = locator<Api>();
 
   List<Reservation> reservations;
+  List<Reservation> orders;
 
-  Future<List<Reservation>> fetchReservations() async {
+  Future<List<Reservation>> fetchOrders() async {
     var result = await _api.getDataCollection();
-    reservations = result.documents
+    orders = result.documents
         .map((doc) => Reservation.fromMap(doc.data, doc.documentID))
         .toList();
-    return reservations;
+    return orders;
   }
 
   Stream<QuerySnapshot> fetchReservationsAsStream() {

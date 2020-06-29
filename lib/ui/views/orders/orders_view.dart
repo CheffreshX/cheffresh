@@ -1,3 +1,5 @@
+import 'package:cheffresh/core/models/reservation/reservation.dart';
+import 'package:cheffresh/core/services/firestore_functions.dart';
 import 'package:cheffresh/core/view_models/orders/orders_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
@@ -10,120 +12,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
-
-class DummyOrder {
-  DateTime DateCreated;
-
-  //Food
-  String DishName, Details, DishCategory;
-  List<String> FoodImages;
-  List<String> Tags;
-  double Price;
-
-  //Food Provider
-  String FoodProviderName, Phone, Address, FoodProviderImage;
-  double FoodProviderRating;
-  double Lat, Lng;
-
-  DummyOrder({
-    DateTime DateCreated,
-    String DishName,
-    String Details,
-    List<String> FoodImages,
-    String FoodProviderImage,
-    List<String> Tags,
-    String DishCategory,
-    double Price,
-    String FoodProviderName,
-    double FoodProviderRating,
-    String Phone,
-    String Address,
-    double Lat,
-    double Lng,
-  }) {
-    this.DateCreated = DateCreated;
-    this.DishName = DishName;
-    this.Details = Details;
-    this.FoodImages = FoodImages;
-    this.FoodProviderImage = FoodProviderImage;
-    this.Tags = Tags;
-    this.DishCategory = DishCategory;
-    this.Price = Price;
-    this.FoodProviderName = FoodProviderName;
-    this.FoodProviderRating = FoodProviderRating;
-    this.Phone = Phone;
-    this.Address = Address;
-    this.Lat = Lat;
-    this.Lng = Lng;
-  }
-}
-
-List<DummyOrder> ORDERS = [
-  DummyOrder(
-    DateCreated: DateTime.parse('2020-06-29 20:18:04Z'),
-    DishName: 'Fish n\' Chips',
-    Details:
-        'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
-    FoodImages: [
-      'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'
-    ],
-    FoodProviderImage:
-        'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
-    Tags: ['Vegan', 'Nut-free'],
-    DishCategory: 'Fish n\' Chips',
-    Price: 40.0,
-    FoodProviderName: 'Louis Henson',
-    FoodProviderRating: 4.5,
-    Phone: '34314233253',
-    Address: '1 Hogwarts Street',
-    Lat: 34.3,
-    Lng: 23.4,
-  ),
-  DummyOrder(
-    DateCreated: DateTime.parse('1969-07-20 20:18:04Z'),
-    DishName: 'Fish n\' Chips',
-    Details:
-        'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
-    FoodImages: [
-      'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'
-    ],
-    FoodProviderImage:
-    'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f',
-    Tags: ['Vegan', 'Nut-free'],
-    DishCategory: 'Fish n\' Chips',
-    Price: 40.0,
-    FoodProviderName: 'Louis Henson',
-    FoodProviderRating: 4.5,
-    Phone: '34314233253',
-    Address: '1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street1 Hogwarts Street',
-    Lat: 34.3,
-    Lng: 23.4,
-  ),
-];
 
 class OrdersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final firestoreProvider = Provider.of<FirestoreFunctions>(context);
     return BaseView<OrdersViewModel>(
-        model: OrdersViewModel(),
-        builder: (BuildContext context, OrdersViewModel model, Widget child) =>
-            Scaffold(
+      model: OrdersViewModel(),
+      onModelReady: (OrdersViewModel model) async {
+        await model.onReady(firestoreProvider);
+      },
+      builder: (BuildContext context, OrdersViewModel model, Widget child) =>
+          Scaffold(
               appBar: defaultAppBar(title: 'Orders'),
               body: SafeArea(
-                  child: model.busy
-                      ? LoadingView()
-                      : ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: ORDERS.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return OrderCard(
-                        order: ORDERS[index],
-                      );
-                    },
-                  )),
-            ));
+                child: model.busy
+                    ? LoadingView()
+                    : ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: firestoreProvider.orders.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return OrderCard(
+                            order: firestoreProvider.orders[index],
+                          );
+                        },
+                      ),
+              )),
+    );
   }
 }
 
@@ -133,7 +51,7 @@ class OrderCard extends StatefulWidget {
     @required this.order,
   }) : super(key: key);
 
-  final DummyOrder order;
+  final Reservation order;
 
   @override
   _OrderCardState createState() => _OrderCardState();
@@ -162,7 +80,7 @@ class _OrderCardState extends State<OrderCard> {
                   children: <Widget>[
                     FoodVisual(widget: widget),
                     FoodProviderVisualWidget(widget: widget),
-                    if (widget.order.Tags?.isNotEmpty)
+                    if (widget.order.tags?.isNotEmpty)
                       BuildTags(widget: widget),
                   ],
                 ),
@@ -179,8 +97,9 @@ class _OrderCardState extends State<OrderCard> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(widget.order.DishName),
-                              if (hasBeenCollected(widget.order.DateCreated))
+                              Text(widget.order.mealName),
+                              if (hasBeenCollected(DateTime.parse(
+                                  widget.order.pickupTime)))
                                 Pill(
                                   '',
                                   color: ALERT_COLOR,
@@ -214,9 +133,10 @@ class _OrderCardState extends State<OrderCard> {
                             ],
                           ),
                           Text(
-                              'Collected ${getDateCollected(widget.order
-                                  .DateCreated)} for £' +
-                                  widget.order.Price.toString()),
+                              'Collected ${getDateCollected(DateTime.parse(
+                                  widget.order
+                                      .pickupTime))} for £' +
+                                  widget.order.price.toString()),
                         ],
                       ),
                     ],
@@ -229,9 +149,10 @@ class _OrderCardState extends State<OrderCard> {
                     ),
                     child: Column(
                       children: <Widget>[
-                        Text(widget.order.Details),
+                        Text(widget.order.details),
                         Text(
-                          'Address: ' + widget.order.Address, softWrap: true,),
+                          'Address: ' + widget.order.details ?? '',
+                          softWrap: true,),
                         MapWithMarker(
                             location:
                             LatLng(34.3, 23.4)),
@@ -276,7 +197,7 @@ class _OrderCardState extends State<OrderCard> {
   }
 
   void _callNumber() async {
-    await FlutterPhoneDirectCaller.callNumber(widget.order.Phone);
+    await FlutterPhoneDirectCaller.callNumber(widget.order.createBy.phone);
   }
 }
 
@@ -293,7 +214,7 @@ class FoodVisual extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
       child: Image.network(
-        widget.order.FoodImages[0],
+        widget.order.pictures[0],
         height: ScreenUtil.screenHeightDp / 5,
         width: double.maxFinite,
         fit: BoxFit.fitWidth,
@@ -319,14 +240,14 @@ class BuildTags extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Pill(
-              widget.order.Tags[0],
+              widget.order.tags[0],
               color: CONTRAST_COLOR,
             ),
             SizedBox(
               width: ScreenUtil().setWidth(5),
             ),
-            if (widget.order.Tags.length > 1)
-              Pill(widget.order.Tags[1], color: PLACEHOLDER_COLOR),
+            if (widget.order.tags.length > 1)
+              Pill(widget.order.tags[1], color: PLACEHOLDER_COLOR),
           ],
         ),
       ),
@@ -359,14 +280,14 @@ class FoodProviderVisualWidget extends StatelessWidget {
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(widget.order.FoodProviderImage),
+                image: NetworkImage(widget.order.createBy.image),
               ),
             ),
           ),
           SmoothStarRating(
               allowHalfRating: true,
               starCount: 5,
-              rating: widget.order.FoodProviderRating,
+              rating: widget.order.rating,
               size: ScreenUtil().setWidth(15),
               isReadOnly: true,
               color: ALERT_COLOR,
