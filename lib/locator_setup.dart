@@ -25,7 +25,8 @@ Future<void> setupLocator() async {
   locator
       .registerLazySingleton<NavigationService>(() => NavigationServiceImpl());
 
-  locator.registerLazySingleton(() => Api(FirestorePaths.USER_PATH));
+  // Firestore
+  //locator.registerLazySingleton(() => Api(FirestorePaths.USER_PATH));
   locator.registerLazySingleton(() => Api(FirestorePaths.RESERVATION_PATH));
   locator.registerLazySingleton(() => FirestoreFunctions());
 }

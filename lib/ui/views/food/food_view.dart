@@ -1,6 +1,7 @@
 import 'package:cheffresh/core/models/reservation/reservation.dart';
 import 'package:cheffresh/core/services/firestore_functions.dart';
 import 'package:cheffresh/ui/widgets/map_with_marker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
@@ -44,33 +45,54 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 //   )
 // ];
 
+// ignore: must_be_immutable
 class FoodView extends StatelessWidget {
-  const FoodView({
+  FoodView({
     Key key,
   }) : super(key: key);
+
+  List<Reservation> reservations;
 
   @override
   Widget build(BuildContext context) {
-    return PageView(children: [FoodCard(), FoodCard()]);
+    final firestoreProvider = Provider.of<FirestoreFunctions>(context);
+
+    return StreamBuilder(
+        stream: firestoreProvider.fetchReservationsAsStream(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            reservations = snapshot.data.documents
+                .map((doc) => Reservation.fromMap(doc.data, doc.documentID))
+                .toList();
+            return PageView.builder(
+              itemCount: reservations.length,
+              itemBuilder: (buildContext, index) =>
+                  FoodCard(reservations[index]),
+            );
+          } else {
+            return Text('fetching');
+          }
+        });
   }
 }
 
+// ignore: must_be_immutable
 class FoodCard extends StatefulWidget {
-  const FoodCard({
+  FoodCard(Reservation reservation, {
     Key key,
-  }) : super(key: key);
+  })
+      : reservation = reservation,
+        super(key: key);
+
+  Reservation reservation;
 
   @override
   _FoodCardState createState() => _FoodCardState();
 }
 
 class _FoodCardState extends State<FoodCard> {
-  List<Reservation> reservations;
-
   @override
   Widget build(BuildContext context) {
-    final firestoreProvider = Provider.of<FirestoreFunctions>(context);
-    print(firestoreProvider);
     return ListView(
       children: [
         Container(
@@ -114,7 +136,7 @@ class _FoodCardState extends State<FoodCard> {
                 child: Column(
                   children: [
                     Text(
-                      "Fish n' Chips",
+                      widget.reservation.mealName ?? '', //Fish n' Chips",
                       style: TextStyle(
                           fontSize: 20,
                           color: Color(0xFF4A5568),
@@ -188,10 +210,10 @@ class _FoodCardState extends State<FoodCard> {
   }
 }
 
+
 class Reviews extends StatelessWidget {
   final double score = 4.5;
   final String author = 'Dart Vader';
-
   //  final String description;
   final description =
       'This satisfied my cravings for fish without causing hard to the environment. Thank you Louis. I will be back. I didn\'t like the seagulls though!';
