@@ -56,6 +56,7 @@ class FoodView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firestoreProvider = Provider.of<FirestoreFunctions>(context);
+
     return StreamBuilder(
         stream: firestoreProvider.fetchReservationsAsStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -77,10 +78,10 @@ class FoodView extends StatelessWidget {
 
 // ignore: must_be_immutable
 class FoodCard extends StatefulWidget {
-  FoodCard(Reservation reservation, {
+  FoodCard(
+    Reservation reservation, {
     Key key,
-  })
-      : reservation = reservation,
+  })  : reservation = reservation,
         super(key: key);
 
   Reservation reservation;
@@ -92,11 +93,11 @@ class FoodCard extends StatefulWidget {
 class _FoodCardState extends State<FoodCard> {
   @override
   Widget build(BuildContext context) {
+    var foodImage = Image.network(widget.reservation.createBy.image);
     return ListView(
       children: [
         Container(
           margin: EdgeInsets.all(16),
-          // color: Color(0xFFF7FAFC),
           decoration: BoxDecoration(
             color: Color(0xFFF7FAFC),
             borderRadius: BorderRadius.circular(8),
@@ -113,8 +114,7 @@ class _FoodCardState extends State<FoodCard> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-                child: Image.network(
-                    'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/meelan-bawjee-A_tPBct4tz8-unsplash.jpg?alt=media&token=609a9559-fe8e-44ae-84e6-530b1d7557eb'),
+                child: foodImage,
               ),
               Container(
                 transform: Matrix4.translationValues(0, -64, 0),
@@ -125,8 +125,7 @@ class _FoodCardState extends State<FoodCard> {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'https://firebasestorage.googleapis.com/v0/b/cheffresh-2020.appspot.com/o/louis-hansel-shotsoflouis-v3OlBE6-fhU-unsplash.jpg?alt=media&token=75a165e6-7727-489c-aa57-f259e9b5436f'),
+                    image: NetworkImage(widget.reservation.pictures.first),
                   ),
                 ),
               ),
@@ -142,7 +141,7 @@ class _FoodCardState extends State<FoodCard> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'by Louis Henson',
+                      'by ' + widget.reservation.createBy.name,
                       style: TextStyle(
                         color: Color(0xFF4A5568),
                       ),
@@ -151,7 +150,7 @@ class _FoodCardState extends State<FoodCard> {
                         allowHalfRating: true,
                         onRated: (v) {},
                         starCount: 5,
-                        rating: 4.5,
+                        rating: widget.reservation.rating,
                         size: 24.0,
                         isReadOnly: true,
                         color: Color(0xFF4A5568),
@@ -164,17 +163,14 @@ class _FoodCardState extends State<FoodCard> {
                         children: [
                           SizedBox(width: 16),
                           Pill(
-                            '4/10 available',
+                            '${widget.reservation.reservedCount}/${widget.reservation.totalCount} available',
                             textColor: Color(0xFF38A169),
                             color: Color(0xFFC6F6D5),
                           ),
                           SizedBox(width: 10),
-                          Pill('Vegan'),
-                          SizedBox(width: 10),
-                          Pill('Nut-free'),
-                          SizedBox(width: 10),
-                          Pill('Junk'),
-                          SizedBox(width: 16),
+                          if (widget.reservation.tags != null &&
+                              widget.reservation.tags.isNotEmpty)
+                            Pill(widget.reservation.tags.first)
                         ],
                       ),
                     ),
@@ -182,14 +178,15 @@ class _FoodCardState extends State<FoodCard> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                          'I used fake fish made of soy to preserve the fish in the atlantic ocean. The chips are made of taste-the-difference potatoes from my local Sainsbury’s on the same day. This should keep those fish cravings for those new vegans :). Don’t have these everyday!',
+                          widget.reservation.details ?? '',
                           style: TextStyle(
                             color: Color(0xFF4A5568),
                           )),
                     ),
                     SizedBox(height: 24),
                     MapWithMarker(
-                        location: LatLng(37.42796133580664, -122.085749655962)),
+                        location: LatLng(widget.reservation.location.longitude,
+                            widget.reservation.location.latitude)),
                     SizedBox(height: 24),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -208,7 +205,6 @@ class _FoodCardState extends State<FoodCard> {
     );
   }
 }
-
 
 class Reviews extends StatelessWidget {
   final double score = 4.5;

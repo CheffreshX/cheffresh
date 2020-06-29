@@ -43,16 +43,17 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
             specifiedType: const FullType(int)));
     }
     if (object.reservedCount != null) {
-      result
-        ..add('reserved_count')
-        ..add(serializers.serialize(object.reservedCount,
-            specifiedType: const FullType(int)));
+      result..add('reserved_count')..add(
+          serializers.serialize(object.reservedCount,
+              specifiedType: const FullType(int)));
     }
     if (object.location != null) {
-      result
-        ..add('location')
-        ..add(serializers.serialize(object.location,
-            specifiedType: const FullType(GeoPoint)));
+      result..add('location')..add(serializers.serialize(object.location,
+          specifiedType: const FullType(GeoPoint)));
+    }
+    if (object.rating != null) {
+      result..add('rating')..add(serializers.serialize(object.rating,
+          specifiedType: const FullType(double)));
     }
     if (object.mealName != null) {
       result..add('meal_name')..add(serializers.serialize(object.mealName,
@@ -63,9 +64,11 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
           specifiedType: const FullType(String)));
     }
     if (object.tags != null) {
-      result..add('tags')..add(serializers.serialize(object.tags,
-          specifiedType:
-          const FullType(BuiltList, const [const FullType(String)])));
+      result
+        ..add('tags')
+        ..add(serializers.serialize(object.tags,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
     }
     if (object.details != null) {
       result..add('details')..add(serializers.serialize(object.details,
@@ -80,9 +83,8 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
           specifiedType: const FullType(double)));
     }
     if (object.createBy != null) {
-      result..add('created_by')
-        ..add(serializers.serialize(object.createBy,
-            specifiedType: const FullType(User)));
+      result..add('created_by')..add(serializers.serialize(object.createBy,
+          specifiedType: const FullType(User)));
     }
     if (object.pictures != null) {
       result..add('pictures')..add(serializers.serialize(object.pictures,
@@ -131,6 +133,10 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
         case 'location':
           result.location = serializers.deserialize(value,
               specifiedType: const FullType(GeoPoint)) as GeoPoint;
+          break;
+        case 'rating':
+          result.rating = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
           break;
         case 'meal_name':
           result.mealName = serializers.deserialize(value,
@@ -195,6 +201,8 @@ class _$Reservation extends Reservation {
   @override
   final GeoPoint location;
   @override
+  final double rating;
+  @override
   final String mealName;
   @override
   final String category;
@@ -223,6 +231,7 @@ class _$Reservation extends Reservation {
     this.totalCount,
     this.reservedCount,
     this.location,
+    this.rating,
     this.mealName,
     this.category,
     this.tags,
@@ -254,6 +263,7 @@ class _$Reservation extends Reservation {
         totalCount == other.totalCount &&
         reservedCount == other.reservedCount &&
         location == other.location &&
+        rating == other.rating &&
         mealName == other.mealName &&
         category == other.category &&
         tags == other.tags &&
@@ -282,15 +292,17 @@ class _$Reservation extends Reservation {
                                                     $jc(
                                                         $jc(
                                                             $jc(
-                                                                0,
-                                                                dateCreated
+                                                                $jc(
+                                                                    0,
+                                                                    dateCreated
+                                                                        .hashCode),
+                                                                pickupTime
                                                                     .hashCode),
-                                                            pickupTime
-                                                                .hashCode),
-                                                        isFull.hashCode),
-                                                    totalCount.hashCode),
-                                                reservedCount.hashCode),
-                                            location.hashCode),
+                                                            isFull.hashCode),
+                                                        totalCount.hashCode),
+                                                    reservedCount.hashCode),
+                                                location.hashCode),
+                                            rating.hashCode),
                                         mealName.hashCode),
                                     category.hashCode),
                                 tags.hashCode),
@@ -308,10 +320,11 @@ class _$Reservation extends Reservation {
       ..add('dateCreated', dateCreated)..add('pickupTime', pickupTime)..add(
           'isFull', isFull)..add('totalCount', totalCount)..add(
           'reservedCount', reservedCount)..add('location', location)..add(
-          'mealName', mealName)..add('category', category)..add(
-          'tags', tags)..add('details', details)..add('id', id)..add(
-          'price', price)..add('createBy', createBy)..add(
-          'pictures', pictures)..add('reviews', reviews))
+          'rating', rating)..add('mealName', mealName)..add(
+          'category', category)..add('tags', tags)..add(
+          'details', details)..add('id', id)..add('price', price)..add(
+          'createBy', createBy)..add('pictures', pictures)..add(
+          'reviews', reviews))
         .toString();
   }
 }
@@ -333,53 +346,57 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
 
   int _totalCount;
   int get totalCount => _$this._totalCount;
+
   set totalCount(int totalCount) => _$this._totalCount = totalCount;
 
   int _reservedCount;
+
   int get reservedCount => _$this._reservedCount;
+
   set reservedCount(int reservedCount) => _$this._reservedCount = reservedCount;
 
   GeoPoint _location;
+
   GeoPoint get location => _$this._location;
+
   set location(GeoPoint location) => _$this._location = location;
 
+  double _rating;
+
+  double get rating => _$this._rating;
+
+  set rating(double rating) => _$this._rating = rating;
+
   String _mealName;
+
   String get mealName => _$this._mealName;
+
   set mealName(String mealName) => _$this._mealName = mealName;
 
   String _category;
+
   String get category => _$this._category;
 
   set category(String category) => _$this._category = category;
 
   ListBuilder<String> _tags;
-
   ListBuilder<String> get tags => _$this._tags ??= new ListBuilder<String>();
-
   set tags(ListBuilder<String> tags) => _$this._tags = tags;
 
   String _details;
-
   String get details => _$this._details;
-
   set details(String details) => _$this._details = details;
 
   String _id;
-
   String get id => _$this._id;
-
   set id(String id) => _$this._id = id;
 
   double _price;
-
   double get price => _$this._price;
-
   set price(double price) => _$this._price = price;
 
   UserBuilder _createBy;
-
   UserBuilder get createBy => _$this._createBy ??= new UserBuilder();
-
   set createBy(UserBuilder createBy) => _$this._createBy = createBy;
 
   ListBuilder<String> _pictures;
@@ -402,6 +419,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
       _totalCount = _$v.totalCount;
       _reservedCount = _$v.reservedCount;
       _location = _$v.location;
+      _rating = _$v.rating;
       _mealName = _$v.mealName;
       _category = _$v.category;
       _tags = _$v.tags?.toBuilder();
@@ -441,6 +459,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
               totalCount: totalCount,
               reservedCount: reservedCount,
               location: location,
+              rating: rating,
               mealName: mealName,
               category: category,
               tags: _tags?.build(),

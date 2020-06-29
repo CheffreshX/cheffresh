@@ -43,8 +43,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
             specifiedType: const FullType(String)));
     }
     if (object.phone != null) {
-      result..add('phone')..add(serializers.serialize(object.phone,
-          specifiedType: const FullType(String)));
+      result
+        ..add('phone')
+        ..add(serializers.serialize(object.phone,
+            specifiedType: const FullType(String)));
     }
     if (object.address != null) {
       result..add('address')..add(serializers.serialize(object.address,
