@@ -29,7 +29,7 @@ class SplashView extends StatelessWidget {
                           height: ScreenUtil.screenHeight / 30,
                         ),
                         Image(
-                          image: AssetImage(ImagePaths.SPLASH_LOGO),
+                          image: AssetImage(ImagePaths.LOGO),
                           fit: BoxFit.contain,
                         ),
                         if (model.busy) LoadingView()
