@@ -69,7 +69,7 @@ class FoodView extends StatelessWidget {
               itemCount: reservations.length,
               itemBuilder: (buildContext, index) => BottomSlidingBar(
                 body: FoodCard(reservations[index]),
-                price: reservations[index].price,
+                reservation: reservations[index],
               ),
             );
           } else {

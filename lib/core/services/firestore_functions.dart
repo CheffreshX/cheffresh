@@ -19,6 +19,24 @@ class FirestoreFunctions extends ChangeNotifier {
     return orders;
   }
 
+  Future reserveOrder(Reservation reservation, String uid) async {
+    Function(ReservationBuilder p1) updates;
+
+    if (reservation.reservedCount == reservation.totalCount - 1) {
+      updates = (ReservationBuilder b) => b
+        ..reservedCount = reservation.totalCount
+        ..isFull = true;
+    } else {
+      var newCount = reservation.reservedCount + 1;
+      updates = (ReservationBuilder b) => b..reservedCount = newCount;
+    }
+
+    var updatedReservation = reservation.rebuild(updates);
+    await _api.updateDocument(
+        updatedReservation.toMap(), updatedReservation.id);
+    return;
+  }
+
   Stream<QuerySnapshot> fetchReservationsAsStream() {
     return _api.streamDataCollection();
   }
