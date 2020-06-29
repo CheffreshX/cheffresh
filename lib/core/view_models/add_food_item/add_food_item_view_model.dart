@@ -14,7 +14,6 @@ class AddFoodItemViewModel extends BaseModel {
   Future<void> addFoodItem({
     Map<String, dynamic> form,
     List<File> foodItemImages,
-    List<String> selectedFoodTags,
     GeoPoint location,
   }) async {
     //Step #1: TO-DO upload images to fire storage
@@ -31,9 +30,10 @@ class AddFoodItemViewModel extends BaseModel {
       ..mealName = form['meal_name']
       ..pickupTime = form['pickupTime']
       ..reservedCount = 0
-      ..tags.addAll(selectedFoodTags)
+      ..tags.addAll(List<String>.from(form['food_tags']))
       ..price = double.parse(form['price']));
 
+    //save this to firebase!
     print(reservation);
   }
 

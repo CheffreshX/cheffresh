@@ -30,9 +30,7 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
 
   // for reservation model
   GeoPoint location;
-  var selectedFoodTags = <String>[];
 
-  //
   bool isFirstTime = true; //Provider.of<User>(context).healthAttachment == null
 
   @override
@@ -281,14 +279,6 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                       spacing: 10,
                                       showCheckmark: true,
                                       selectedColor: Colors.green[300],
-                                      onChanged: (val) {
-                                        setState(() {
-                                          print(val.runtimeType);
-                                          print(val);
-//                                          selectedFoodTags = val;
-                                        });
-                                        print(selectedFoodTags);
-                                      },
                                       decoration: InputDecoration(
                                           labelText: 'Select many tags',
                                           focusedBorder: OutlineInputBorder(
@@ -432,8 +422,6 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                           model.addFoodItem(
                                               form: _fbKey.currentState.value,
                                               foodItemImages: foodItemImages,
-                                              selectedFoodTags:
-                                              selectedFoodTags,
                                               location: location);
                                         } else {
                                           print(_fbKey

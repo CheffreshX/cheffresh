@@ -43,9 +43,10 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
             specifiedType: const FullType(int)));
     }
     if (object.reservedCount != null) {
-      result..add('reserved_count')..add(
-          serializers.serialize(object.reservedCount,
-              specifiedType: const FullType(int)));
+      result
+        ..add('reserved_count')
+        ..add(serializers.serialize(object.reservedCount,
+            specifiedType: const FullType(int)));
     }
     if (object.location != null) {
       result..add('location')..add(serializers.serialize(object.location,
@@ -67,11 +68,8 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
                 const FullType(BuiltList, const [const FullType(String)])));
     }
     if (object.details != null) {
-      result
-        ..add('details')
-        ..add(serializers.serialize(object.details,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(String)])));
+      result..add('details')..add(serializers.serialize(object.details,
+          specifiedType: const FullType(String)));
     }
     if (object.price != null) {
       result
@@ -143,15 +141,13 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
           break;
         case 'tags':
           result.tags.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
+              specifiedType:
+              const FullType(BuiltList, const [const FullType(String)]))
+          as BuiltList<Object>);
           break;
         case 'details':
-          result.details.replace(serializers.deserialize(value,
-                  specifiedType:
-                      const FullType(BuiltList, const [const FullType(String)]))
-              as BuiltList<Object>);
+          result.details = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'price':
           result.price = serializers.deserialize(value,
@@ -200,7 +196,7 @@ class _$Reservation extends Reservation {
   @override
   final BuiltList<String> tags;
   @override
-  final BuiltList<String> details;
+  final String details;
   @override
   final double price;
   @override
@@ -312,27 +308,19 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
   _$Reservation _$v;
 
   String _dateCreated;
-
   String get dateCreated => _$this._dateCreated;
-
   set dateCreated(String dateCreated) => _$this._dateCreated = dateCreated;
 
   String _pickupTime;
-
   String get pickupTime => _$this._pickupTime;
-
   set pickupTime(String pickupTime) => _$this._pickupTime = pickupTime;
 
   bool _isFull;
-
   bool get isFull => _$this._isFull;
-
   set isFull(bool isFull) => _$this._isFull = isFull;
 
   int _totalCount;
-
   int get totalCount => _$this._totalCount;
-
   set totalCount(int totalCount) => _$this._totalCount = totalCount;
 
   int _reservedCount;
@@ -345,27 +333,37 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
 
   String _mealName;
   String get mealName => _$this._mealName;
+
   set mealName(String mealName) => _$this._mealName = mealName;
 
   String _category;
+
   String get category => _$this._category;
+
   set category(String category) => _$this._category = category;
 
   ListBuilder<String> _tags;
+
   ListBuilder<String> get tags => _$this._tags ??= new ListBuilder<String>();
+
   set tags(ListBuilder<String> tags) => _$this._tags = tags;
 
-  ListBuilder<String> _details;
-  ListBuilder<String> get details =>
-      _$this._details ??= new ListBuilder<String>();
-  set details(ListBuilder<String> details) => _$this._details = details;
+  String _details;
+
+  String get details => _$this._details;
+
+  set details(String details) => _$this._details = details;
 
   double _price;
+
   double get price => _$this._price;
+
   set price(double price) => _$this._price = price;
 
   UserBuilder _createBy;
+
   UserBuilder get createBy => _$this._createBy ??= new UserBuilder();
+
   set createBy(UserBuilder createBy) => _$this._createBy = createBy;
 
   ListBuilder<String> _pictures;
@@ -391,7 +389,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
       _mealName = _$v.mealName;
       _category = _$v.category;
       _tags = _$v.tags?.toBuilder();
-      _details = _$v.details?.toBuilder();
+      _details = _$v.details;
       _price = _$v.price;
       _createBy = _$v.createBy?.toBuilder();
       _pictures = _$v.pictures?.toBuilder();
@@ -429,7 +427,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
               mealName: mealName,
               category: category,
               tags: _tags?.build(),
-              details: _details?.build(),
+              details: details,
               price: price,
               createBy: _createBy?.build(),
               pictures: _pictures?.build(),
@@ -439,8 +437,6 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
       try {
         _$failedField = 'tags';
         _tags?.build();
-        _$failedField = 'details';
-        _details?.build();
 
         _$failedField = 'createBy';
         _createBy?.build();

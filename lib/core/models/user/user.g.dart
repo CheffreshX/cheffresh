@@ -31,8 +31,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
             specifiedType: const FullType(String)));
     }
     if (object.image != null) {
-      result..add('image')..add(serializers.serialize(object.image,
-          specifiedType: const FullType(String)));
+      result
+        ..add('image')
+        ..add(serializers.serialize(object.image,
+            specifiedType: const FullType(String)));
     }
     if (object.healthCertificate != null) {
       result..add('health_certificate')..add(

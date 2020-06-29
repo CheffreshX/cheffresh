@@ -51,7 +51,7 @@ abstract class Reservation implements Built<Reservation, ReservationBuilder> {
   BuiltList<String> get tags;
 
   @nullable
-  BuiltList<String> get details;
+  String get details;
 
   @nullable
   double get price;
