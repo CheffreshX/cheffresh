@@ -11,8 +11,8 @@ class SplashViewModel extends BaseModel {
 
   Future<void> onReady() async {
     setBusy(true);
-    var isLoggedIn = await FirebaseAuth.instance.currentUser() != null;
-    if (isLoggedIn) {
+    var user = await FirebaseAuth.instance.currentUser();
+    if (user != null && user.displayName != null) {
       setBusy(false);
       unawaited(_navigationService.popAllAndPushNamed(RoutePaths.Home));
     } else {
