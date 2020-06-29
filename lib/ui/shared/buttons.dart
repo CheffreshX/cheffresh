@@ -17,7 +17,7 @@ Widget buildRaisedButton(
           style: buttonTextStyle,
         ),
       ),
-      color: ACCENT_COLOR,
+      color: Color(0xFF38A169),
       textColor: CONTRAST_COLOR,
       shape: roundedShape,
     ),

@@ -8,9 +8,11 @@ import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class BottomSlidingBar extends StatelessWidget {
-  const BottomSlidingBar({Key key, @required this.body}) : super(key: key);
+  BottomSlidingBar({Key key, @required this.body, this.price})
+      : super(key: key);
 
   final Widget body;
+  double price;
 
   final BorderRadiusGeometry radius = const BorderRadius.only(
     topLeft: Radius.circular(24.0),
@@ -48,7 +50,7 @@ class BottomSlidingBar extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30.0)),
           child: Center(
             child: Text(
-              'Reserve for 4.50',
+              'Reserve for £${price.toString()}',
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),

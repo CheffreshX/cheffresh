@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
+import '../home/bottom_sliding_bar.dart';
 // class Meal {
 //   final String title;
 //   final String description;
@@ -66,8 +67,10 @@ class FoodView extends StatelessWidget {
                 .toList();
             return PageView.builder(
               itemCount: reservations.length,
-              itemBuilder: (buildContext, index) =>
-                  FoodCard(reservations[index]),
+              itemBuilder: (buildContext, index) => BottomSlidingBar(
+                body: FoodCard(reservations[index]),
+                price: reservations[index].price,
+              ),
             );
           } else {
             return Center(child: Text('fetching'));
@@ -177,8 +180,7 @@ class _FoodCardState extends State<FoodCard> {
                     SizedBox(height: 24),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                          widget.reservation.details ?? '',
+                      child: Text(widget.reservation.details ?? '',
                           style: TextStyle(
                             color: Color(0xFF4A5568),
                           )),

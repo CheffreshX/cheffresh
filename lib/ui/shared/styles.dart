@@ -105,4 +105,4 @@ TextStyle languageSwitchTextStyle = GoogleFonts.poppins(
 //===== Shapes =====
 RoundedRectangleBorder roundedShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(60.0),
-    side: const BorderSide(color: ACCENT_COLOR));
+    side: const BorderSide(color: Color(0xFF38A169)));
