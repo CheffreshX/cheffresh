@@ -35,7 +35,10 @@ class FirestoreFunctions extends ChangeNotifier {
 
     var updatedReservation = reservation.rebuild(updates);
     await _api.updateDocument(
-        updatedReservation.toMap(), updatedReservation.id);
+      updatedReservation.toMap(),
+      updatedReservation.id,
+      FirestorePaths.RESERVATION_PATH,
+    );
     return;
   }
 
