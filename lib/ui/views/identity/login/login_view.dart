@@ -1,3 +1,4 @@
+import 'package:cheffresh/core/constants/routes.dart';
 import 'package:cheffresh/core/view_models/login/login_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/buttons.dart';
@@ -11,6 +12,7 @@ import '../../base_view.dart';
 
 class LoginView extends StatefulWidget {
   static final CountryCode DEFAULT_COUNTRY_CODE = CountryCode.fromCode('GB');
+
   @override
   _LoginViewState createState() => _LoginViewState();
 }
@@ -118,6 +120,31 @@ class _LoginViewState extends State<LoginView> {
                         padding:
                             EdgeInsets.only(top: ScreenUtil().setWidth(20.0)),
                         child: buildRaisedButton2,
+                      ),
+                      Padding(
+                        padding:
+                            EdgeInsets.only(top: ScreenUtil().setWidth(20.0)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Has no account? ',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            GestureDetector(
+                                child: Text(
+                                  'Register Now',
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.green,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                onTap: () {
+                                  model.goTo(context,
+                                      path: RoutePaths.Register);
+                                }),
+                          ],
+                        ),
                       ),
                     ],
                   ),
