@@ -48,124 +48,126 @@ class _LoginViewState extends State<LoginView> {
                   padding: EdgeInsets.symmetric(
                       vertical: ScreenUtil().setWidth(20),
                       horizontal: ScreenUtil().setWidth(25)),
-                  child: Column(
-                    children: <Widget>[
-                      Image.asset('assets/images/logo_transparent.png',
-                          height: 160),
-                      SizedBox(height: 40),
-                      FormBuilder(
-                        key: _formBuilderKey,
-                        autovalidate: false,
-                        readOnly: false,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: CountryCodePicker(
-                                    initialSelection: countryCode.toString(),
-                                    hideMainText: true,
-                                    showFlagMain: true,
-                                    showFlag: true,
-                                    hideSearch: false,
-                                    showCountryOnly: true,
-                                    showOnlyCountryWhenClosed: true,
-                                    alignLeft: true,
-                                    onChanged: (c) {
-                                      print(c.toString());
-                                      countryCode = c;
-                                      print(
-                                          'Previously ${_formBuilderKey.currentState.value}, now ${countryCode.toString()}');
-                                      _formBuilderKey.currentState
-                                          .setAttributeValue(
-                                              'mobileNumber', countryCode);
-                                      setState(() {});
-                                    },
-                                    favorite: ['US', 'GB', 'EG', 'DE', 'FR'],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(countryCode.toString()),
-                                ),
-                                Expanded(
-                                    flex: 3,
-                                    child: FormBuilderTextField(
-                                      onFieldSubmitted: (_) {
-                                        login(model);
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        Image.asset('assets/images/logo_transparent.png',
+                            height: 160),
+                        SizedBox(height: 40),
+                        FormBuilder(
+                          key: _formBuilderKey,
+                          autovalidate: false,
+                          readOnly: false,
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: CountryCodePicker(
+                                      initialSelection: countryCode.toString(),
+                                      hideMainText: true,
+                                      showFlagMain: true,
+                                      showFlag: true,
+                                      hideSearch: false,
+                                      showCountryOnly: true,
+                                      showOnlyCountryWhenClosed: true,
+                                      alignLeft: true,
+                                      onChanged: (c) {
+                                        print(c.toString());
+                                        countryCode = c;
+                                        print(
+                                            'Previously ${_formBuilderKey.currentState.value}, now ${countryCode.toString()}');
+                                        _formBuilderKey.currentState
+                                            .setAttributeValue(
+                                                'mobileNumber', countryCode);
+                                        setState(() {});
                                       },
-                                      autofocus: true,
-                                      attribute: 'mobileNumber',
-                                      decoration: InputDecoration(
-                                          hintText: '7123 456789',
-                                          focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              borderSide: BorderSide(
-                                                  color: Colors.green)),
-                                          enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              borderSide: BorderSide()),
-                                          labelStyle:
-                                              TextStyle(color: Colors.green),
-                                          labelText: 'Phone'),
-                                      validators: [
-                                        FormBuilderValidators.required(
-                                            errorText:
-                                                'Please enter valid phone number'),
-                                      ],
-                                      keyboardType: TextInputType.phone,
-                                    )),
-                              ],
-                            ),
-                          ],
+                                      favorite: ['US', 'GB', 'EG', 'DE', 'FR'],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(countryCode.toString()),
+                                  ),
+                                  Expanded(
+                                      flex: 3,
+                                      child: FormBuilderTextField(
+                                        onFieldSubmitted: (_) {
+                                          login(model);
+                                        },
+                                        autofocus: true,
+                                        attribute: 'mobileNumber',
+                                        decoration: InputDecoration(
+                                            hintText: '7123 456789',
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: BorderSide(
+                                                    color: Colors.green)),
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: BorderSide()),
+                                            labelStyle:
+                                                TextStyle(color: Colors.green),
+                                            labelText: 'Phone'),
+                                        validators: [
+                                          FormBuilderValidators.required(
+                                              errorText:
+                                                  'Please enter valid phone number'),
+                                        ],
+                                        keyboardType: TextInputType.phone,
+                                      )),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: ScreenUtil().setWidth(20.0)),
-                        child: MaterialButton(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 5),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            color: Colors.green,
-                            child: Text(
-                              'Login',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                            onPressed: () {
-                              login(model);
-                            }),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(top: ScreenUtil().setWidth(20.0)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Has no account? ',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            GestureDetector(
-                                child: Text(
-                                  'Register Now',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                onTap: () {
-                                  model.goTo(context,
-                                      path: RoutePaths.Register);
-                                }),
-                          ],
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: ScreenUtil().setWidth(20.0)),
+                          child: MaterialButton(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 50, vertical: 5),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              color: Colors.green,
+                              child: Text(
+                                'Login',
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                              onPressed: () {
+                                login(model);
+                              }),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: ScreenUtil().setWidth(20.0)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Has no account? ',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                              GestureDetector(
+                                  child: Text(
+                                    'Register Now',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.green,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  onTap: () {
+                                    model.goTo(context,
+                                        path: RoutePaths.Register);
+                                  }),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
         );
