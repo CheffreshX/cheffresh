@@ -98,22 +98,22 @@ class _OrderCardState extends State<OrderCard> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(widget.order.mealName),
-                              if (hasBeenCollected(DateTime.parse(
-                                  widget.order.pickupTime)))
-                                Pill(
-                                  '',
-                                  color: ALERT_COLOR,
-                                  widget: Row(
-                                    children: <Widget>[
-                                      Text('Add Review '),
-                                      Icon(
-                                        Icons.rate_review,
-                                        size: ScreenUtil().setWidth(15),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              else
+                              if (!hasBeenCollected(
+                                  DateTime.parse(widget.order.pickupTime)))
+////                                Pill(
+////                                  '',
+////                                  color: ALERT_COLOR,
+////                                  widget: Row(
+////                                    children: <Widget>[
+////                                      Text('Add Review '),
+////                                      Icon(
+////                                        Icons.rate_review,
+////                                        size: ScreenUtil().setWidth(15),
+////                                      )
+////                                    ],
+////                                  ),
+////                                )
+//                              else
                                 InkWell(
                                   onTap: _callNumber,
                                   child: Pill(

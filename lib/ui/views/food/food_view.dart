@@ -3,6 +3,7 @@ import 'package:cheffresh/core/services/firestore_functions.dart';
 import 'package:cheffresh/ui/widgets/map_with_marker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -189,13 +190,13 @@ class _FoodCardState extends State<FoodCard> {
                     MapWithMarker(
                         location: LatLng(widget.reservation.location.longitude,
                             widget.reservation.location.latitude)),
-                    SizedBox(height: 24),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Reviews(),
-                    ),
+//                    SizedBox(height: 24),
+//                    Padding(
+//                      padding: EdgeInsets.symmetric(horizontal: 16),
+//                      child: Reviews(),
+//                    ),
                     SizedBox(
-                      height: 64,
+                      height: ScreenUtil.screenHeightDp / 9,
                     )
                   ],
                 ),
@@ -208,83 +209,83 @@ class _FoodCardState extends State<FoodCard> {
   }
 }
 
-class Reviews extends StatelessWidget {
-  final double score = 4.5;
-  final String author = 'Dart Vader';
-  //  final String description;
-  final description =
-      'This satisfied my cravings for fish without causing hard to the environment. Thank you Louis. I will be back. I didn\'t like the seagulls though!';
-
-  const Reviews({
-    Key key,
-    // @required this.score,
-    // @required this.author,
-    // @required this.description,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var reviews = [
-      Review(score: score, author: author, description: description),
-      SizedBox(height: 8),
-      Review(score: score, author: author, description: description),
-      SizedBox(height: 8),
-      Review(score: score, author: author, description: description),
-    ];
-
-    return Column(
-      children: [
-        ...reviews.map((review) {
-          return review;
-        }),
-        SizedBox(
-          height: 24,
-        )
-      ],
-    );
-  }
-}
-
-class Review extends StatelessWidget {
-  const Review({
-    Key key,
-    @required this.score,
-    @required this.author,
-    @required this.description,
-  }) : super(key: key);
-
-  final double score;
-  final String author;
-  final String description;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SmoothStarRating(
-                allowHalfRating: true,
-                onRated: (v) {},
-                starCount: 5,
-                rating: score,
-                size: 16.0,
-                isReadOnly: true,
-                color: Color(0xFF4A5568),
-                spacing: 0.0),
-            Text(author,
-                style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic))
-          ],
-        ),
-        Text(
-          description,
-          style: TextStyle(fontSize: 12),
-        ),
-      ],
-    );
-  }
-}
+//class Reviews extends StatelessWidget {
+//  final double score = 4.5;
+//  final String author = 'Dart Vader';
+//  //  final String description;
+//  final description =
+//      'This satisfied my cravings for fish without causing hard to the environment. Thank you Louis. I will be back. I didn\'t like the seagulls though!';
+//
+//  const Reviews({
+//    Key key,
+//    // @required this.score,
+//    // @required this.author,
+//    // @required this.description,
+//  }) : super(key: key);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    var reviews = [
+//      Review(score: score, author: author, description: description),
+//      SizedBox(height: 8),
+//      Review(score: score, author: author, description: description),
+//      SizedBox(height: 8),
+//      Review(score: score, author: author, description: description),
+//    ];
+//
+//    return Column(
+//      children: [
+//        ...reviews.map((review) {
+//          return review;
+//        }),
+//        SizedBox(
+//          height: 24,
+//        )
+//      ],
+//    );
+//  }
+//}
+//
+//class Review extends StatelessWidget {
+//  const Review({
+//    Key key,
+//    @required this.score,
+//    @required this.author,
+//    @required this.description,
+//  }) : super(key: key);
+//
+//  final double score;
+//  final String author;
+//  final String description;
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Column(
+//      children: [
+//        Row(
+//          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//          children: [
+//            SmoothStarRating(
+//                allowHalfRating: true,
+//                onRated: (v) {},
+//                starCount: 5,
+//                rating: score,
+//                size: 16.0,
+//                isReadOnly: true,
+//                color: Color(0xFF4A5568),
+//                spacing: 0.0),
+//            Text(author,
+//                style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic))
+//          ],
+//        ),
+//        Text(
+//          description,
+//          style: TextStyle(fontSize: 12),
+//        ),
+//      ],
+//    );
+//  }
+//}
 
 class Pill extends StatelessWidget {
   final String text;
