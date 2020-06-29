@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:cheffresh/core/constants/categories.dart';
 import 'package:cheffresh/core/constants/tags.dart';
-import 'package:cheffresh/core/view_models/add_food_item/add_food_item_view_model.dart';
+import 'package:cheffresh/core/view_models/food/add_food_item_view_model.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
