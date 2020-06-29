@@ -73,18 +73,18 @@ abstract class Reservation implements Built<Reservation, ReservationBuilder> {
     return json.encode(serializers.serializeWith(Reservation.serializer, this));
   }
 
-  Map toMap() {
-    return serializers.serializeWith(Reservation.serializer, this);
-  }
-
   static Reservation fromJson(String jsonString) {
     return serializers.deserializeWith(
         Reservation.serializer, json.decode(jsonString));
   }
 
+  Map toMap() {
+    return standardSerializers.serializeWith(Reservation.serializer, this);
+  }
+
   static Reservation fromMap(Map jsonMap, String id) {
     jsonMap.putIfAbsent('id', () => id ?? '');
-    return serializers.deserializeWith(Reservation.serializer, jsonMap);
+    return standardSerializers.deserializeWith(Reservation.serializer, jsonMap);
   }
 
   static Serializer<Reservation> get serializer => _$reservationSerializer;
