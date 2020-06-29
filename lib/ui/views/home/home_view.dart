@@ -1,5 +1,4 @@
 import 'package:cheffresh/core/constants/main_tab.dart';
-import 'package:cheffresh/core/providers/controller/controller_provider.dart';
 import 'package:cheffresh/core/view_models/home/home_view_model.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cheffresh/ui/views/food/food_view.dart';
@@ -8,7 +7,6 @@ import 'package:cheffresh/ui/views/settings/more_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-import 'package:provider/provider.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -19,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   MainTab _currentTab = MainTab.HOME;
-
+  int currentScreen = 1;
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeViewModel>(
@@ -30,19 +28,7 @@ class _HomeViewState extends State<HomeView> {
                 resizeToAvoidBottomInset: true,
                 resizeToAvoidBottomPadding: true,
                 bottomNavigationBar: buildBottomNavigationBar(),
-                body: SafeArea(
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: Provider.of<ControllerProvider>(context)
-                        .mainScreenController,
-                    onPageChanged: onPageChanged,
-                    children: <Widget>[
-                      OrdersView(),
-                      FoodView(),
-                      SettingsView(),
-                    ],
-                  ),
-                )));
+                body: SafeArea(child: getScreen(currentScreen))));
   }
 
   void onPageChanged(int pageIndex) {
@@ -70,12 +56,26 @@ class _HomeViewState extends State<HomeView> {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       selectedItemColor: Colors.green,
-      currentIndex: _currentTab.index,
-      onTap: (index) => Provider.of<ControllerProvider>(context, listen: false)
-          .mainScreenController
-          .jumpToPage(index),
+      currentIndex: currentScreen,
+      onTap: (index) {
+        setState(() {
+          currentScreen = index;
+        });
+      },
       selectedFontSize: ScreenUtil().setSp(12),
       unselectedFontSize: ScreenUtil().setSp(12),
     );
+  }
+
+  Widget getScreen(int index) {
+    switch (index) {
+      case 0:
+        return OrdersView();
+      case 1:
+        return FoodView();
+      case 2:
+        return SettingsView();
+    }
+    return null;
   }
 }

@@ -30,10 +30,10 @@ class BottomSlidingBar extends StatelessWidget {
           .panelController,
       backdropEnabled: true,
       borderRadius: radius,
-      minHeight: ScreenUtil.screenHeight / 30,
-      maxHeight: ScreenUtil.screenHeight / 7,
+      minHeight: ScreenUtil.screenHeight / 40,
+      maxHeight: ScreenUtil.screenHeight / 8,
       panel: Padding(
-        padding: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+        padding: EdgeInsets.only(top: ScreenUtil().setHeight(10)),
         child: _buildPaymentMethods(context, reservation),
       ),
       collapsed: GestureDetector(
@@ -74,8 +74,17 @@ Widget _buildPaymentMethods(BuildContext context, Reservation reservation) {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Payment options',
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Payment options',
+              style: TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16),
+            ),
+          ],
         ),
         Spacer(),
         Card(
@@ -95,6 +104,7 @@ Widget _buildPaymentMethods(BuildContext context, Reservation reservation) {
                         horizontal: ScreenUtil().setWidth(8)),
                     child: Icon(
                       Icons.check_circle,
+                      color: Colors.green,
                     ))
               ],
             ),
@@ -118,6 +128,7 @@ Widget _buildPaymentMethods(BuildContext context, Reservation reservation) {
                             horizontal: ScreenUtil().setWidth(8)),
                         child: Icon(
                           Icons.check_circle_outline,
+                          color: Colors.green,
                         ))
                   ],
                 ),

@@ -21,10 +21,12 @@ class Pill extends StatelessWidget {
           color: color,
           borderRadius: BorderRadius.circular(30),
         ),
-        padding: EdgeInsets.symmetric(vertical: 3, horizontal: 5),
-        child: widget ?? Text(
-          text,
-          style: TextStyle(color: textColor, fontSize: ScreenUtil().setSp(12)),
-        ));
+        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        child: widget ??
+            Text(
+              text,
+              style:
+                  TextStyle(color: textColor, fontSize: ScreenUtil().setSp(12)),
+            ));
   }
 }

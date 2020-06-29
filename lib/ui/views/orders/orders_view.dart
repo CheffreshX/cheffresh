@@ -61,10 +61,7 @@ class _OrderCardState extends State<OrderCard> {
   bool _isExpanded = false;
 
   bool hasBeenCollected(DateTime dateCollected) =>
-      !DateTime
-          .now()
-          .difference(dateCollected)
-          .isNegative;
+      !DateTime.now().difference(dateCollected).isNegative;
 
   @override
   Widget build(BuildContext context) {
@@ -118,13 +115,17 @@ class _OrderCardState extends State<OrderCard> {
                                   onTap: _callNumber,
                                   child: Pill(
                                     '',
-                                    color: ALERT_COLOR,
+                                    color: Colors.green,
                                     widget: Row(
                                       children: <Widget>[
-                                        Text('Call '),
+                                        Text(
+                                          'Call ',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                         Icon(
                                           Icons.call,
                                           size: ScreenUtil().setWidth(15),
+                                          color: Colors.white,
                                         )
                                       ],
                                     ),
@@ -133,9 +134,7 @@ class _OrderCardState extends State<OrderCard> {
                             ],
                           ),
                           Text(
-                              'Collected ${getDateCollected(DateTime.parse(
-                                  widget.order
-                                      .pickupTime))} for £' +
+                              'Collected ${getDateCollected(DateTime.parse(widget.order.pickupTime))} for £' +
                                   widget.order.price.toString()),
                         ],
                       ),
@@ -152,10 +151,9 @@ class _OrderCardState extends State<OrderCard> {
                         Text(widget.order.details),
                         Text(
                           'Address: ' + widget.order.details ?? '',
-                          softWrap: true,),
-                        MapWithMarker(
-                            location:
-                            LatLng(34.3, 23.4)),
+                          softWrap: true,
+                        ),
+                        MapWithMarker(location: LatLng(34.3, 23.4)),
                       ],
                     ),
                   ),
@@ -182,13 +180,9 @@ class _OrderCardState extends State<OrderCard> {
   String getDateCollected(DateTime orderDate) {
     final now = DateTime.now();
     var time = '';
-    if (now
-        .difference(orderDate)
-        .inDays < 1) {
+    if (now.difference(orderDate).inDays < 1) {
       time = 'today at ${orderDate.hour}:${orderDate.minute}';
-    } else if (now
-        .difference(orderDate)
-        .inDays < 2) {
+    } else if (now.difference(orderDate).inDays < 2) {
       time = 'yesterday at ${orderDate.hour}:${orderDate.minute}';
     } else {
       time = 'on ${orderDate.day}/${orderDate.month}/${orderDate.year}';
@@ -290,7 +284,7 @@ class FoodProviderVisualWidget extends StatelessWidget {
               rating: widget.order.rating,
               size: ScreenUtil().setWidth(15),
               isReadOnly: true,
-              color: ALERT_COLOR,
+              color: Colors.amber,
               spacing: 0.0),
         ],
       ),
