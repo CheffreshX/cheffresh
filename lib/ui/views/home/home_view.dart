@@ -5,7 +5,7 @@ import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cheffresh/ui/views/food/food_view.dart';
 import 'package:cheffresh/ui/views/orders/orders_view.dart';
-import 'package:cheffresh/ui/views/settings/settings.dart';
+import 'package:cheffresh/ui/views/settings/more_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';

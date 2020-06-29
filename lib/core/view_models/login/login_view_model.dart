@@ -58,7 +58,7 @@ class LoginViewModel extends BaseModel {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return CupertinoAlertDialog(
-            title: Text('Enter sms Code'),
+            title: Text('Enter verification code'),
             content: CupertinoTextField(
               onChanged: (value) {
                 smsVerificationCode = value;
@@ -100,6 +100,7 @@ class LoginViewModel extends BaseModel {
   }
 
   void _codeAutoRetrievalTimeout(String verificationId) {
+    displayDialog('Phone authentication timed out');
     print('Phone authentication timed out');
     setBusy(false);
     smsVerificationCode = verificationId;

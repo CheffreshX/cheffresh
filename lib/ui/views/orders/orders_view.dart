@@ -1,6 +1,7 @@
 import 'package:cheffresh/core/view_models/orders/orders_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
+import 'package:cheffresh/ui/shared/loading.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cheffresh/ui/widgets/map_with_marker.dart';
 import 'package:cheffresh/ui/widgets/pill.dart';
@@ -111,9 +112,7 @@ class OrdersView extends StatelessWidget {
               appBar: defaultAppBar(title: 'Orders'),
               body: SafeArea(
                   child: model.busy
-                      ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
+                      ? LoadingView()
                       : ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,

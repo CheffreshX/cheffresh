@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cheffresh/core/constants/categories.dart';
 import 'package:cheffresh/core/constants/tags.dart';
 import 'package:cheffresh/core/view_models/food/add_food_item_view_model.dart';
+import 'package:cheffresh/ui/shared/loading.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +62,7 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                 ),
                 key: _scaffoldKey,
                 body: model.busy
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
+                    ? LoadingView()
                     : SingleChildScrollView(
                         child: Column(
                           children: <Widget>[

@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../base_view.dart';
+import '../base_view.dart';
 
 class LoginView extends StatefulWidget {
   static final CountryCode DEFAULT_COUNTRY_CODE = CountryCode.fromCode('GB');
@@ -50,9 +50,7 @@ class _LoginViewState extends State<LoginView> {
           ),
           resizeToAvoidBottomPadding: true,
           body: model.busy
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
+              ? LoginView()
               : Padding(
                   padding: EdgeInsets.all(ScreenUtil().setWidth(25)),
                   child: Column(

@@ -56,7 +56,6 @@ class FoodView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firestoreProvider = Provider.of<FirestoreFunctions>(context);
-
     return StreamBuilder(
         stream: firestoreProvider.fetchReservationsAsStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

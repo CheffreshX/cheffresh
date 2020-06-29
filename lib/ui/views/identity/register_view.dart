@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cheffresh/core/view_models/register/register_view_model.dart';
+import 'package:cheffresh/ui/shared/loading.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,9 +49,7 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 key: _scaffoldKey,
                 body: model.busy
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
+                    ? LoadingView()
                     : SingleChildScrollView(
                         child: Column(
                           children: <Widget>[

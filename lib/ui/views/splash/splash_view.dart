@@ -1,6 +1,7 @@
 import 'package:cheffresh/core/constants/image_paths.dart';
 import 'package:cheffresh/core/view_models/splash/splash_view_model.dart';
 import 'package:cheffresh/ui/shared/colors.dart';
+import 'package:cheffresh/ui/shared/loading.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,9 +23,14 @@ class SplashView extends StatelessWidget {
                   height: ScreenUtil.screenHeight,
                   color: SPLASH_COLOR,
                   child: Center(
-                    child: Image(
-                      image: AssetImage(ImagePaths.SPLASH_LOGO),
-                      fit: BoxFit.contain,
+                    child: Column(
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage(ImagePaths.SPLASH_LOGO),
+                          fit: BoxFit.contain,
+                        ),
+                        if (model.busy) LoadingView()
+                      ],
                     ),
                   ),
                 ),
