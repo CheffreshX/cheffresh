@@ -38,9 +38,64 @@ class _MapWithMarkerState extends State<MapWithMarker> {
         child: GoogleMap(
           circles: {Circle(circleId: CircleId(widget.latLng.toString()))},
           onTap: (_) {
-            print('Open the google maps navigation');
+            return showDialog(
+                context: context,
+                builder: (context) {
+                  return StatefulBuilder(builder: (context, setState) {
+                    return Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: <Widget>[
+                            GoogleMap(
+                              mapType: MapType.normal,
+                              circles: {
+                                Circle(
+                                    circleId:
+                                        CircleId(widget.latLng.toString()))
+                              },
+                              myLocationEnabled: true,
+                              markers: {
+                                Marker(
+                                  visible: true,
+                                  markerId: MarkerId(widget.latLng.toString()),
+                                  position: widget.latLng,
+                                  anchor: Offset(0.5, 0.5),
+                                )
+                              },
+                              buildingsEnabled: true,
+                              initialCameraPosition: widget.position,
+                              myLocationButtonEnabled: true,
+                              zoomControlsEnabled: true,
+                              rotateGesturesEnabled: true,
+                              tiltGesturesEnabled: true,
+                              scrollGesturesEnabled: true,
+                              zoomGesturesEnabled: true,
+                              compassEnabled: true,
+                              mapToolbarEnabled: true,
+                              onMapCreated: (GoogleMapController controller) {
+                                if (!_controller.isCompleted) {
+                                  _controller.complete(controller);
+                                }
+                                setState(() {});
+                              },
+                            ),
+                            RaisedButton(
+                                textColor: Colors.white,
+                                color: Colors.green,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Text('Done'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                })
+                          ],
+                        ));
+                  });
+                });
           },
-          mapType: MapType.hybrid,
+          mapType: MapType.normal,
           initialCameraPosition: widget.position,
           zoomControlsEnabled: false,
           zoomGesturesEnabled: false,

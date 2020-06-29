@@ -70,7 +70,7 @@ class FoodView extends StatelessWidget {
                   FoodCard(reservations[index]),
             );
           } else {
-            return Text('fetching');
+            return Center(child: Text('fetching'));
           }
         });
   }
@@ -289,7 +289,8 @@ class Pill extends StatelessWidget {
   final Color color;
   final Color textColor;
 
-  Pill(this.text, {
+  Pill(
+    this.text, {
     Key key,
     this.color = const Color(0xFFE2E8F0),
     this.textColor = const Color(0xFF4A5568),

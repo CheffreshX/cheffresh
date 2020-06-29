@@ -1,6 +1,5 @@
 import 'package:cheffresh/core/providers/controller/controller_provider.dart';
 import 'package:cheffresh/ui/shared/buttons.dart';
-import 'package:cheffresh/ui/shared/colors.dart';
 import 'package:cheffresh/ui/shared/dialogs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +20,7 @@ class BottomSlidingBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SlidingUpPanel(
-      controller: Provider
-          .of<ControllerProvider>(context, listen: false)
+      controller: Provider.of<ControllerProvider>(context, listen: false)
           .panelController,
       backdropEnabled: true,
       borderRadius: radius,
@@ -33,11 +31,9 @@ class BottomSlidingBar extends StatelessWidget {
         child: _buildPaymentMethods(context),
       ),
       collapsed: GestureDetector(
-          onTap: () =>
-              Provider
-                  .of<ControllerProvider>(context, listen: false)
-                  .panelController
-                  .open(),
+          onTap: () => Provider.of<ControllerProvider>(context, listen: false)
+              .panelController
+              .open(),
           child: _collapsedWidget(context)),
       body: body,
     );
@@ -45,13 +41,16 @@ class BottomSlidingBar extends StatelessWidget {
 
   Container _collapsedWidget(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: GREY_COLOR, borderRadius: radius),
+      decoration: BoxDecoration(color: Colors.green, borderRadius: radius),
       child: Center(
         child: Padding(
           padding:
               EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30.0)),
           child: Center(
-            child: Text('Reserve for 4.50'),
+            child: Text(
+              'Reserve for 4.50',
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
           ),
         ),
       ),
@@ -115,9 +114,8 @@ Widget _buildPaymentMethods(BuildContext context) {
                 ),
               ),
             ),
-            onTap: () =>
-                displayDialog(
-                    'This feature will be implemented in the future')),
+            onTap: () => displayDialog(
+                'This feature will be implemented in the future')),
         Spacer(),
         Padding(
           padding: EdgeInsets.symmetric(
@@ -127,8 +125,7 @@ Widget _buildPaymentMethods(BuildContext context) {
           child: buildRaisedButton(
               text: 'Confirm',
               onPressed: () =>
-                  Provider
-                      .of<ControllerProvider>(context, listen: false)
+                  Provider.of<ControllerProvider>(context, listen: false)
                       .mainScreenController
                       .jumpToPage(0)),
         ),
