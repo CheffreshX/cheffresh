@@ -54,8 +54,11 @@ class BottomSlidingBar extends StatelessWidget {
           EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30.0)),
           child: Center(
             child: Text(
-              'Reserve for £${reservation.price.toString()}',
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              'only £${reservation.price.toString()} - Reserve now?',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
