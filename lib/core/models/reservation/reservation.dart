@@ -41,6 +41,9 @@ abstract class Reservation implements Built<Reservation, ReservationBuilder> {
   GeoPoint get location;
 
   @nullable
+  double get rating;
+
+  @nullable
   @BuiltValueField(wireName: 'meal_name')
   String get mealName;
 
