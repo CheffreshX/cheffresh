@@ -37,9 +37,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
             specifiedType: const FullType(String)));
     }
     if (object.healthCertificate != null) {
-      result..add('health_certificate')..add(
-          serializers.serialize(object.healthCertificate,
-              specifiedType: const FullType(String)));
+      result
+        ..add('health_certificate')
+        ..add(serializers.serialize(object.healthCertificate,
+            specifiedType: const FullType(String)));
     }
     if (object.phone != null) {
       result..add('phone')..add(serializers.serialize(object.phone,

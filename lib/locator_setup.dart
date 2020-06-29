@@ -1,8 +1,11 @@
+import 'package:cheffresh/core/constants/firebase_constants.dart';
+import 'package:cheffresh/core/services/api.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/services/authentication/auth_api.dart';
 import 'core/services/authentication/auth_service.dart';
 import 'core/services/authentication/auth_service_impl.dart';
+import 'core/services/firestore_functions.dart';
 import 'core/services/navigation/navigation_service.dart';
 import 'core/services/navigation/navigation_service_impl.dart';
 
@@ -21,4 +24,8 @@ Future<void> setupLocator() async {
 
   locator
       .registerLazySingleton<NavigationService>(() => NavigationServiceImpl());
+
+  locator.registerLazySingleton(() => Api(FirestorePaths.USER_PATH));
+  locator.registerLazySingleton(() => Api(FirestorePaths.RESERVATION_PATH));
+  locator.registerLazySingleton(() => FirestoreFunctions());
 }

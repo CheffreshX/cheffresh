@@ -39,9 +39,18 @@ abstract class Review implements Built<Review, ReviewBuilder> {
     return json.encode(serializers.serializeWith(Review.serializer, this));
   }
 
+  Map toMap() {
+    return serializers.serializeWith(Review.serializer, this);
+  }
+
   static Review fromJson(String jsonString) {
     return serializers.deserializeWith(
         Review.serializer, json.decode(jsonString));
+  }
+
+  static Review fromMap(Map jsonMap, String id) {
+    jsonMap.putIfAbsent('id', () => id ?? '');
+    return serializers.deserializeWith(Review.serializer, jsonMap);
   }
 
   static Serializer<Review> get serializer => _$reviewSerializer;

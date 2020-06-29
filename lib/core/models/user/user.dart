@@ -49,9 +49,18 @@ abstract class User implements Built<User, UserBuilder> {
     return json.encode(serializers.serializeWith(User.serializer, this));
   }
 
+  Map toMap() {
+    return serializers.serializeWith(User.serializer, this);
+  }
+
   static User fromJson(String jsonString) {
     return serializers.deserializeWith(
         User.serializer, json.decode(jsonString));
+  }
+
+  static User fromMap(Map jsonMap, String id) {
+    jsonMap.putIfAbsent('id', () => id ?? '');
+    return serializers.deserializeWith(User.serializer, jsonMap);
   }
 
   static Serializer<User> get serializer => _$userSerializer;
