@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:cheffresh/core/constants/api_keys.dart';
-import 'package:cheffresh/core/view_models/register/register_view_model.dart';
+import 'package:cheffresh/core/view_models/auth/auth_view_model.dart';
 import 'package:cheffresh/ui/shared/loading.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,10 +29,9 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<RegisterViewModel>(
-        model: RegisterViewModel(),
-        builder: (BuildContext context, RegisterViewModel model,
-                Widget child) =>
+    return BaseView<AuthViewModel>(
+        model: AuthViewModel(),
+        builder: (BuildContext context, AuthViewModel model, Widget child) =>
             Scaffold(
                 appBar: AppBar(
                   title: Text(
@@ -63,16 +62,16 @@ class _RegisterViewState extends State<RegisterView> {
                                 child: Column(
                                   children: <Widget>[
                                     FormBuilderTextField(
-                                      attribute: 'Name',
+                                      attribute: 'name',
                                       maxLines: 1,
                                       decoration: InputDecoration(
                                         labelText: 'Full Name',
                                         labelStyle:
-                                            TextStyle(color: Colors.green),
+                                        TextStyle(color: Colors.green),
                                         isDense: true,
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
-                                                BorderSide(color: Colors.green),
+                                            BorderSide(color: Colors.green),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         enabledBorder: OutlineInputBorder(
@@ -90,17 +89,17 @@ class _RegisterViewState extends State<RegisterView> {
                                     ),
                                     SizedBox(height: 15),
                                     FormBuilderTextField(
-                                      attribute: 'Address',
+                                      attribute: 'address',
                                       decoration: InputDecoration(
                                         labelText: 'Address',
                                         labelStyle:
-                                            TextStyle(color: Colors.green),
+                                        TextStyle(color: Colors.green),
                                         isDense: true,
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
-                                                BorderSide(color: Colors.green),
+                                            BorderSide(color: Colors.green),
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(),
                                           borderRadius:
@@ -116,17 +115,17 @@ class _RegisterViewState extends State<RegisterView> {
                                     ),
                                     SizedBox(height: 15),
                                     FormBuilderPhoneField(
-                                      attribute: 'Phone',
+                                      attribute: 'phone',
                                       decoration: InputDecoration(
                                         labelText: 'Phone',
                                         labelStyle:
-                                            TextStyle(color: Colors.green),
+                                        TextStyle(color: Colors.green),
                                         isDense: true,
                                         suffixIcon: Icon(Icons.phone_android,
                                             color: Colors.green),
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
-                                                BorderSide(color: Colors.green),
+                                            BorderSide(color: Colors.green),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         enabledBorder: OutlineInputBorder(
@@ -305,7 +304,8 @@ class _RegisterViewState extends State<RegisterView> {
                                   if (_fbKey.currentState.saveAndValidate() &&
                                       result != null) {
                                     model.register(result.latLng,
-                                        _fbKey.currentState.value, personImage);
+                                        _fbKey.currentState.value, personImage,
+                                        context);
                                   } else {
                                     print(_fbKey.currentState
                                         .value['contact_person'].runtimeType);

@@ -1,5 +1,5 @@
 import 'package:cheffresh/core/constants/routes.dart';
-import 'package:cheffresh/core/view_models/login/login_view_model.dart';
+import 'package:cheffresh/core/view_models/auth/auth_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
@@ -22,21 +22,21 @@ class _LoginViewState extends State<LoginView> {
   final GlobalKey<FormBuilderState> _formBuilderKey =
       GlobalKey<FormBuilderState>();
 
-  void login(LoginViewModel model) async {
+  void login(AuthViewModel model) async {
     if (_formBuilderKey.currentState.saveAndValidate()) {
       print(_formBuilderKey.currentState.value);
       await model.verify(
-        countryCode.toString() +
-            _formBuilderKey.currentState.value['mobileNumber'],
-      );
+          countryCode.toString() +
+              _formBuilderKey.currentState.value['mobileNumber'],
+          true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<LoginViewModel>(
-      model: LoginViewModel(),
-      builder: (BuildContext context, LoginViewModel model, Widget child) {
+    return BaseView<AuthViewModel>(
+      model: AuthViewModel(),
+      builder: (BuildContext context, AuthViewModel model, Widget child) {
         return Scaffold(
           appBar: defaultAppBar(
             title: 'Login',
@@ -134,8 +134,8 @@ class _LoginViewState extends State<LoginView> {
                               color: Colors.green,
                               child: Text(
                                 'Login',
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 20),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
                               ),
                               onPressed: () {
                                 FocusScope.of(context).unfocus();
