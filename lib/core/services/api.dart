@@ -32,4 +32,9 @@ class Api {
     var ref = _db.collection(path);
     return ref.document(id).updateData(data);
   }
+
+  Future<void> setDocument(Map data, String id, String path) {
+    var ref = _db.collection(path);
+    return ref.document(id).setData(data);
+  }
 }
