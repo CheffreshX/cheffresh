@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cheffresh/core/models/reservation/reservation.dart';
 import 'package:cheffresh/core/services/firestore_functions.dart';
 import 'package:cheffresh/ui/widgets/map_with_marker.dart';
@@ -118,7 +119,42 @@ class _FoodCardState extends State<FoodCard> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-                child: foodImage,
+                child: CachedNetworkImage(
+                  fadeInDuration: Duration(milliseconds: 500),
+                  fit: BoxFit.cover,
+                  height: 310,
+                  imageUrl: widget.reservation.createBy.image,
+                  placeholder: (context, url) => Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'loading',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.green, fontSize: 16),
+                      ),
+                      Container(
+                        width: 200,
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            height: 10,
+                            child: LinearProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.green),
+                              backgroundColor: Colors.green.withOpacity(0.3),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  errorWidget: (context, url, error) =>
+                      Icon(Icons.error, color: Colors.green, size: 48),
+                ),
               ),
               Container(
                 transform: Matrix4.translationValues(0, -64, 0),
@@ -157,7 +193,8 @@ class _FoodCardState extends State<FoodCard> {
                         rating: widget.reservation.rating,
                         size: 24.0,
                         isReadOnly: true,
-                        color: Color(0xFF4A5568),
+                        borderColor: Colors.green,
+                        color: Colors.amber,
                         spacing: 0.0),
                     SizedBox(height: 24),
                     SingleChildScrollView(
