@@ -1,7 +1,6 @@
 import 'package:cheffresh/core/constants/routes.dart';
 import 'package:cheffresh/core/view_models/login/login_view_model.dart';
 import 'package:cheffresh/ui/shared/app_bar.dart';
-import 'package:cheffresh/ui/shared/buttons.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -38,12 +37,6 @@ class _LoginViewState extends State<LoginView> {
     return BaseView<LoginViewModel>(
       model: LoginViewModel(),
       builder: (BuildContext context, LoginViewModel model, Widget child) {
-        var buildRaisedButton2 = buildRaisedButton(
-          text: 'Login',
-          onPressed: () {
-            login(model);
-          },
-        );
         return Scaffold(
           appBar: defaultAppBar(
             title: 'Login',
@@ -52,9 +45,14 @@ class _LoginViewState extends State<LoginView> {
           body: model.busy
               ? LoginView()
               : Padding(
-                  padding: EdgeInsets.all(ScreenUtil().setWidth(25)),
+                  padding: EdgeInsets.symmetric(
+                      vertical: ScreenUtil().setWidth(20),
+                      horizontal: ScreenUtil().setWidth(25)),
                   child: Column(
                     children: <Widget>[
+                      Image.asset('assets/images/logo_transparent.png',
+                          height: 160),
+                      SizedBox(height: 40),
                       FormBuilder(
                         key: _formBuilderKey,
                         autovalidate: false,
@@ -99,8 +97,17 @@ class _LoginViewState extends State<LoginView> {
                                       attribute: 'mobileNumber',
                                       decoration: InputDecoration(
                                           hintText: '7123 456789',
+                                          focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                  color: Colors.green)),
+                                          enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: BorderSide()),
                                           labelStyle:
-                                              TextStyle(color: Colors.indigo),
+                                              TextStyle(color: Colors.green),
                                           labelText: 'Phone'),
                                       validators: [
                                         FormBuilderValidators.required(
@@ -117,7 +124,21 @@ class _LoginViewState extends State<LoginView> {
                       Padding(
                         padding:
                             EdgeInsets.only(top: ScreenUtil().setWidth(20.0)),
-                        child: buildRaisedButton2,
+                        child: MaterialButton(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 5),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            color: Colors.green,
+                            child: Text(
+                              'Login',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () {
+                              login(model);
+                            }),
                       ),
                       Padding(
                         padding:
