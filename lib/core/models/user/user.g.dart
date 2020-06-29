@@ -25,8 +25,10 @@ class _$UserSerializer implements StructuredSerializer<User> {
             specifiedType: const FullType(String)));
     }
     if (object.dateCreated != null) {
-      result..add('date_created')..add(serializers.serialize(object.dateCreated,
-          specifiedType: const FullType(String)));
+      result
+        ..add('date_created')
+        ..add(serializers.serialize(object.dateCreated,
+            specifiedType: const FullType(String)));
     }
     if (object.image != null) {
       result..add('image')..add(serializers.serialize(object.image,
@@ -43,7 +45,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
     }
     if (object.address != null) {
       result..add('address')..add(serializers.serialize(object.address,
-            specifiedType: const FullType(String)));
+          specifiedType: const FullType(String)));
     }
     if (object.location != null) {
       result
@@ -206,13 +208,11 @@ class _$User extends User {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('User')
-          ..add('name', name)
-          ..add('dateCreated', dateCreated)..add('image', image)..add(
-          'healthCertificate', healthCertificate)..add('phone', phone)
-          ..add('address', address)
-          ..add('location', location)
-          ..add('reservations', reservations)
-          ..add('reservations_created', reservations_created))
+      ..add('name', name)..add('dateCreated', dateCreated)..add(
+          'image', image)..add('healthCertificate', healthCertificate)..add(
+          'phone', phone)..add('address', address)..add(
+          'location', location)..add('reservations', reservations)..add(
+          'reservations_created', reservations_created))
         .toString();
   }
 }
@@ -222,38 +222,27 @@ class UserBuilder implements Builder<User, UserBuilder> {
 
   String _name;
   String get name => _$this._name;
-
   set name(String name) => _$this._name = name;
 
   String _dateCreated;
-
   String get dateCreated => _$this._dateCreated;
-
   set dateCreated(String dateCreated) => _$this._dateCreated = dateCreated;
 
   String _image;
-
   String get image => _$this._image;
-
   set image(String image) => _$this._image = image;
 
   String _healthCertificate;
-
   String get healthCertificate => _$this._healthCertificate;
-
   set healthCertificate(String healthCertificate) =>
       _$this._healthCertificate = healthCertificate;
 
   String _phone;
-
   String get phone => _$this._phone;
-
   set phone(String phone) => _$this._phone = phone;
 
   String _address;
-
   String get address => _$this._address;
-
   set address(String address) => _$this._address = address;
 
   GeoPoint _location;

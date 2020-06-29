@@ -24,6 +24,12 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
         ..add(serializers.serialize(object.dateCreated,
             specifiedType: const FullType(String)));
     }
+    if (object.pickupTime != null) {
+      result
+        ..add('pickup_time')
+        ..add(serializers.serialize(object.pickupTime,
+            specifiedType: const FullType(String)));
+    }
     if (object.isFull != null) {
       result
         ..add('isFull')
@@ -107,6 +113,10 @@ class _$ReservationSerializer implements StructuredSerializer<Reservation> {
           result.dateCreated = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'pickup_time':
+          result.pickupTime = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'isFull':
           result.isFull = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
@@ -174,6 +184,8 @@ class _$Reservation extends Reservation {
   @override
   final String dateCreated;
   @override
+  final String pickupTime;
+  @override
   final bool isFull;
   @override
   final int totalCount;
@@ -203,6 +215,7 @@ class _$Reservation extends Reservation {
         ..update(updates)).build();
 
   _$Reservation._({this.dateCreated,
+    this.pickupTime,
     this.isFull,
     this.totalCount,
     this.reservedCount,
@@ -232,6 +245,7 @@ class _$Reservation extends Reservation {
     if (identical(other, this)) return true;
     return other is Reservation &&
         dateCreated == other.dateCreated &&
+        pickupTime == other.pickupTime &&
         isFull == other.isFull &&
         totalCount == other.totalCount &&
         reservedCount == other.reservedCount &&
@@ -260,8 +274,12 @@ class _$Reservation extends Reservation {
                                         $jc(
                                             $jc(
                                                 $jc(
-                                                    $jc(0,
-                                                        dateCreated.hashCode),
+                                                    $jc(
+                                                        $jc(
+                                                            0,
+                                                            dateCreated
+                                                                .hashCode),
+                                                        pickupTime.hashCode),
                                                     isFull.hashCode),
                                                 totalCount.hashCode),
                                             reservedCount.hashCode),
@@ -279,11 +297,11 @@ class _$Reservation extends Reservation {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Reservation')
-      ..add('dateCreated', dateCreated)..add('isFull', isFull)..add(
-          'totalCount', totalCount)..add('reservedCount', reservedCount)..add(
-          'location', location)..add('mealName', mealName)..add(
-          'category', category)..add('tags', tags)..add(
-          'details', details)..add('price', price)..add(
+      ..add('dateCreated', dateCreated)..add('pickupTime', pickupTime)..add(
+          'isFull', isFull)..add('totalCount', totalCount)..add(
+          'reservedCount', reservedCount)..add('location', location)..add(
+          'mealName', mealName)..add('category', category)..add(
+          'tags', tags)..add('details', details)..add('price', price)..add(
           'createBy', createBy)..add('pictures', pictures)..add(
           'reviews', reviews))
         .toString();
@@ -294,15 +312,27 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
   _$Reservation _$v;
 
   String _dateCreated;
+
   String get dateCreated => _$this._dateCreated;
+
   set dateCreated(String dateCreated) => _$this._dateCreated = dateCreated;
 
+  String _pickupTime;
+
+  String get pickupTime => _$this._pickupTime;
+
+  set pickupTime(String pickupTime) => _$this._pickupTime = pickupTime;
+
   bool _isFull;
+
   bool get isFull => _$this._isFull;
+
   set isFull(bool isFull) => _$this._isFull = isFull;
 
   int _totalCount;
+
   int get totalCount => _$this._totalCount;
+
   set totalCount(int totalCount) => _$this._totalCount = totalCount;
 
   int _reservedCount;
@@ -353,6 +383,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
   ReservationBuilder get _$this {
     if (_$v != null) {
       _dateCreated = _$v.dateCreated;
+      _pickupTime = _$v.pickupTime;
       _isFull = _$v.isFull;
       _totalCount = _$v.totalCount;
       _reservedCount = _$v.reservedCount;
@@ -390,6 +421,7 @@ class ReservationBuilder implements Builder<Reservation, ReservationBuilder> {
       _$result = _$v ??
           new _$Reservation._(
               dateCreated: dateCreated,
+              pickupTime: pickupTime,
               isFull: isFull,
               totalCount: totalCount,
               reservedCount: reservedCount,

@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:cheffresh/core/models/reservation/reservation.dart';
+import 'package:cheffresh/core/constants/categories.dart';
+import 'package:cheffresh/core/constants/tags.dart';
 import 'package:cheffresh/core/view_models/add_food_item/add_food_item_view_model.dart';
 import 'package:cheffresh/ui/views/base_view.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,18 +18,23 @@ class AddFoodItemView extends StatefulWidget {
 
 class _AddFoodItemViewState extends State<AddFoodItemView> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  Reservation reservation = Reservation();
-  File healthAttachment;
-  var foodItemImages = <File>[];
-  var foodTags = <dynamic>[];
   final picker = ImagePicker();
-  Set<Marker> markers = {};
   final Completer<GoogleMapController> _controller = Completer();
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+  var foodItemImages = <File>[];
+  Set<Marker> markers = {};
   final mapKey = Key('map');
-  final ValueChanged _onChanged = (val) => print(val);
-  var categories = ['Pizza', 'Cake', 'Other'];
-  bool isFirstTime = true;
+
+  // for user model update
+  File healthAttachment;
+
+  // for reservation model
+  GeoPoint location;
+  var selectedFoodTags = <String>[];
+
+  //
+  bool isFirstTime = true; //Provider.of<User>(context).healthAttachment == null
+
   @override
   Widget build(BuildContext context) {
     return BaseView<AddFoodItemViewModel>(
@@ -74,22 +81,21 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                 child: Column(
                                   children: <Widget>[
                                     FormBuilderTextField(
-                                      attribute: 'Name',
+                                      attribute: 'meal_name',
                                       maxLines: 1,
                                       decoration: InputDecoration(
                                         labelText: 'Food Name',
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
-                                                BorderSide(color: Colors.green),
+                                            BorderSide(color: Colors.green),
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
                                       ),
-                                      onChanged: _onChanged,
                                       validators: [
                                         FormBuilderValidators.required(),
                                         FormBuilderValidators.minLength(4),
@@ -98,48 +104,44 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                     ),
                                     SizedBox(height: 15),
                                     FormBuilderTextField(
-                                      attribute: 'Details',
+                                      attribute: 'details',
                                       decoration: InputDecoration(
                                         labelText: 'Details',
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
-                                                BorderSide(color: Colors.green),
+                                            BorderSide(color: Colors.green),
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
                                       ),
-                                      onChanged: _onChanged,
                                       validators: [
                                         FormBuilderValidators.required(),
-                                        FormBuilderValidators.minLength(16),
                                       ],
                                       keyboardType: TextInputType.text,
                                     ),
                                     SizedBox(height: 15),
                                     FormBuilderTextField(
-                                      attribute: 'Price',
+                                      attribute: 'price',
                                       decoration: InputDecoration(
                                         labelText: 'Price',
                                         suffixIcon: Icon(Icons.attach_money),
                                         focusedBorder: OutlineInputBorder(
                                             borderSide:
-                                                BorderSide(color: Colors.green),
+                                            BorderSide(color: Colors.green),
                                             borderRadius:
-                                                BorderRadius.circular(10)),
+                                            BorderRadius.circular(10)),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(),
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
                                       ),
-                                      onChanged: _onChanged,
                                       validators: [
                                         FormBuilderValidators.required(),
-                                        FormBuilderValidators.minLength(16),
                                         FormBuilderValidators.numeric()
                                       ],
                                       keyboardType: TextInputType.number,
@@ -164,11 +166,12 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                       validators: [
                                         FormBuilderValidators.required()
                                       ],
-                                      items: categories
-                                          .map((category) => DropdownMenuItem(
-                                                value: category,
-                                                child: Text('$category'),
-                                              ))
+                                      items: CATEGORIES
+                                          .map((category) =>
+                                          DropdownMenuItem(
+                                            value: category,
+                                            child: Text('$category'),
+                                          ))
                                           .toList(),
                                     ),
                                     SizedBox(height: 15),
@@ -274,15 +277,17 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                     ),
                                     SizedBox(height: 15),
                                     FormBuilderFilterChip(
-                                      attribute: 'foodTags',
+                                      attribute: 'food_tags',
                                       spacing: 10,
                                       showCheckmark: true,
                                       selectedColor: Colors.green[300],
                                       onChanged: (val) {
                                         setState(() {
-                                          foodTags = val;
+                                          print(val.runtimeType);
+                                          print(val);
+//                                          selectedFoodTags = val;
                                         });
-                                        print(foodTags);
+                                        print(selectedFoodTags);
                                       },
                                       decoration: InputDecoration(
                                           labelText: 'Select many tags',
@@ -290,23 +295,13 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                               borderSide: BorderSide(
                                                   color: Colors.green),
                                               borderRadius:
-                                                  BorderRadius.circular(10)),
+                                              BorderRadius.circular(10)),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(),
                                             borderRadius:
-                                                BorderRadius.circular(10),
+                                            BorderRadius.circular(10),
                                           )),
-                                      options: [
-                                        FormBuilderFieldOption(
-                                            value: 'Desserts',
-                                            child: Text('Desserts')),
-                                        FormBuilderFieldOption(
-                                            value: 'MainCourses',
-                                            child: Text('Main Courses')),
-                                        FormBuilderFieldOption(
-                                            value: 'Pizza',
-                                            child: Text('Pizza')),
-                                      ],
+                                      options: _getTags(),
                                     ),
                                   ],
                                 ),
@@ -384,7 +379,17 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
-                                                      setState(() {});
+                                                      setState(() {
+                                                        location = GeoPoint(
+                                                            markers
+                                                                .first
+                                                                .position
+                                                                .latitude,
+                                                            markers
+                                                                .first
+                                                                .position
+                                                                .longitude);
+                                                      });
                                                     })
                                               ],
                                             ));
@@ -395,8 +400,7 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                             Padding(
                               padding: EdgeInsets.all(20.0),
                               child: FormBuilderDateTimePicker(
-                                attribute: 'date',
-                                onChanged: _onChanged,
+                                attribute: 'pickupTime',
                                 inputType: InputType.both,
                                 decoration: const InputDecoration(
                                   labelText: 'Time of pickup',
@@ -428,7 +432,9 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
                                           model.addFoodItem(
                                               form: _fbKey.currentState.value,
                                               foodItemImages: foodItemImages,
-                                              foodTags: foodTags);
+                                              selectedFoodTags:
+                                              selectedFoodTags,
+                                              location: location);
                                         } else {
                                           print(_fbKey
                                               .currentState
@@ -506,5 +512,14 @@ class _AddFoodItemViewState extends State<AddFoodItemView> {
         )
       ],
     );
+  }
+
+  List<FormBuilderFieldOption> _getTags() {
+    var list = <FormBuilderFieldOption>[];
+    for (var tag in TAGS) {
+      list.add(FormBuilderFieldOption(value: tag, child: Text(tag)));
+    }
+    ;
+    return list;
   }
 }

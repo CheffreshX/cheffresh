@@ -23,6 +23,10 @@ abstract class Reservation implements Built<Reservation, ReservationBuilder> {
   String get dateCreated;
 
   @nullable
+  @BuiltValueField(wireName: 'pickup_time')
+  String get pickupTime;
+
+  @nullable
   bool get isFull;
 
   @nullable
