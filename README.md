@@ -1,13 +1,13 @@
 # cheffresh [![Actions Status](https://github.com/FreshOver/cheffresh/workflows/Build%20and%20Test/badge.svg)](https://github.com/FreshOver/cheffresh/actions) <img src="https://img.shields.io/badge/made%20with-dart-blue.svg" alt="made with dart">
 This project was created as a part of #Hack20 - Online International Flutter Hackathon 2020
 
+[![Cheffresh video](https://img.youtube.com/vi/zl8voaFNOcE/0.jpg)](https://www.youtube.com/watch?v=zl8voaFNOcE)
+
 ## Summary - 140 character limit
-Home cooks are back in business, safely and efficiently! They cook food in bulk, fresh for a collection time. Neighbours reserve food.
+Home cooks can get back in business, safely and efficiently. They cook food in bulk, fresh for a collection time. Neighbours reserve food.
 
 ## Additional information (e.g. technologies used, motivation) - 500 character limit
-During Covid, we’ve seen smaller businesses face a tougher time getting customers and are getting drowned by their bills. You might not see some of these restaurants after restrictions are eased. That’s a sad thing. Restaurants are inefficient because they cook food on demand, are located in non-residential areas, and have idle staff most of the day.
-
-We used Flutter and Firebase, and a whole set of plugins and packages available on pub.
+Ever since we were plagued by Covid-19, we’ve seen some businesses and restaurants permanently close down while people lost their jobs. They're inefficient because they cook food on demand, are located in non-residential areas, and have idle staff most of the day. With Cheffresh, chefs can get back in business today, safely and efficiently from the comfort of their homes. We used Flutter and Firebase, and many plugins and packages available on pub.
 
 ## Motivation
 During Covid, we’ve seen smaller businesses face a tougher time getting customers and are getting drowned by their bills. You might not see some of these restaurants after restrictions are eased. That’s a sad thing. There are economical reasons why these businesses are struggling:
